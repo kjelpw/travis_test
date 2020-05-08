@@ -1,0 +1,108 @@
+<%- include('partials/header') -%>
+<%- include('partials/title-banner') -%>
+
+<div id="viewer-section" class="<% if(error) { %>object-view-error<% } %>">
+  <% if(error) { %>
+    <h5><%- error %></h5>
+  <% } %>
+
+  <div class="viewer-wrapper row">
+    <div id="object-view" class="col-md-12">
+      <%- viewer %>
+    </div>
+
+    <div id="transcript-view-wrapper">
+      <div id="transcript-view">
+        <%= transcript %>
+      </div>
+    </div>
+  </div>
+
+  <div class="download-links panel-collapsed">
+    <ul>
+      <% for (var link in downloads) { %>
+        <li><a href="<%= downloads[link].uri %>" download><%= downloads[link].filename %></a></li>
+      <% } %>
+    </ul>
+  </div>
+</div>
+
+<div id="metadata-section">
+  <div class="object-options">
+    <div class="container">
+        <span id="object-view-controls">
+          <% if(citations) { %>
+            <button id="view-citations" alt="View Citations" type="button">Cite This Item</button>
+          <% } %>
+          <% if(downloads) { %>
+            <button id="file-download" class="download-button" alt="Download Item">Download File</button>
+          <% } %>
+          <% if(transcript) { %>
+            <button id="view-transcript" alt="View Transcript" type="button">View Transcript</button>
+          <% } %>
+        </span>
+    </div>
+  </div>
+
+  <% if(citations) { %>
+    <div class="container object-citations citation-text panel-collapsed">
+      <div class="citation-text row">
+        <% for(index in citations) { %>
+          <% if(index % 2 == 0) { %>
+            <div class="col-md-6">
+              <div class="citation">
+                <h5><%= citations[index].format %> Format</h5>
+                <hr>
+                <p><%= citations[index].citation %></p>
+              </div>
+          <% } else { %>
+              <div class="citation">
+                <h5><%= citations[index].format %> Format</h5>
+                <hr>
+                <p><%= citations[index].citation %></p>
+              </div>
+            </div>
+          <% } %>
+        <% } %>
+        <% if(citations.length % 2 != 0) { %>
+            <div class="citation"></div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="container mods-display metadata-content">
+    <!-- <div class="table-responsive mods-display metadata-content" style="display: none"> --> <!-- If hidden by default, shown with 'view details' button -->
+    <div class="table-responsive">
+        <table class="table data-table" summary="<% for (var key in summary) { %><%= summary[key] %> <% } %>">
+          <tr style="display: none;">
+            <th scope="col">Data Type</th>  
+            <th scope="col">Value</th>  
+          </tr>
+          <% for (var key in metadata) { %>
+            <tr>
+              <td class="table-label" scope="row"><%= key %></td>
+            <% if(typeof metadata[key] == "object") { %>
+              <td>
+              <% for (var subkey in metadata[key]) { %>
+                <p><%- metadata[key][subkey] %></p>
+            <% } %>
+            </td></tr>
+            <% } else { %>
+              <td><p><%- metadata[key] %></p></td></tr>
+            <% } %>
+          <% } %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if(devError) { %>
+  <script>
+    console.log("<%= devError %>");
+  </script>
+<% } %>
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,83 @@
+<%- include('partials/header') -%>
+<%- include('partials/title-banner') -%>
+
+<div class="row collection-breadcrumbs">
+	<div class="col-md-12">
+		<% if (collection_breadcrumb_trail) { %>
+			<%- collection_breadcrumb_trail %>
+		<% } %>
+	</div>
+</div>
+
+<div class="row facet-breadcrumbs">
+	<div class="col-md-12">
+		<% if (facet_breadcrumb_trail) { %>
+			<%- facet_breadcrumb_trail %>
+		<% } %>
+	</div>
+</div>
+
+<div class="row no-side-margin section content results-display">
+	<div class="col-md-3">
+		<% if(error == null) { %>
+			<div class="sidebar-section">
+				<h4>Search This Collection</h4>
+				<hr>
+				<%- include('partials/sidebar-search') -%>
+			</div>
+			<div class="result-facets sidebar-section">
+				<% if(facets) { %>
+					<h4>Filter By</h4>
+					<hr>
+					<%- include('partials/facets') -%>
+				<% } %>
+			</div>
+		<% } %>
+	</div>
+
+	<div class="col-md-9 collections-wrapper">
+		<h2><%= current_collection_title %></h2>
+	    <hr>
+	    <% if(error) { %>
+  			<h5><%- error %></h5>
+  		<% } else { %>
+
+  			<%- include('partials/paginator') -%>
+
+  			<div id="collections">
+  				<div class="row">
+	  				<% for (var i = 0; i < collections.length; i++) { %>
+
+	  					<div class="col-sm-3 collection-thumb">
+							<dl class="item">
+								<a href="<%= root_url %><%= collections[i].path %>/<%= collections[i].pid %>">
+									<dt>
+										<div class="item-thumb">
+											<img src="<%= collections[i].tn %>" alt="<%= collections[i].title %>">
+										</div>
+									</dt>
+									<dd>
+										<div class="item-details">
+											<h3 class="item-title"><%= collections[i].title %></h3>
+										</div>
+									</dd>
+								</a>
+							</dl>
+						</div>
+
+	  				<% } %>
+	  			</div>
+
+	    	</div>
+
+
+	    <% } %>
+	</div>
+</div>
+
+<%- include('partials/footer') -%>
+
+
+
+
+

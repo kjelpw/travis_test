@@ -1,0 +1,452 @@
+/* Extra small devices (phones, up to 479px) */
+@media screen and (max-width: 479px) {
+  .logo h1 {
+    font-size: 2.4em;
+  }
+
+  div#hero-banner {
+    background-size: initial;
+  }
+
+  div#hero-banner .logo {
+      top: 80px;
+  }
+
+  div.logo h1 {
+    min-height: 138px;
+  }
+
+  div.intro-text {
+      margin-top: 48px;
+  }
+
+  .wide-container {
+    width: 88%;
+  }
+
+  .welcomeBox .title1 {
+    font-size: 30px;
+  }
+
+  .welcomeBox .description {
+    font-size: 0.95em;
+  }
+
+  .section {
+      /*margin-top: 40px;*/
+  }
+
+  .searchform {
+    top: 65px;
+    width: 80%;
+  }
+
+  .form-group {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  div#sidebar {
+    padding: 0;
+  }
+
+  div.facets ul {
+      font-size: 13px;
+  }
+
+  .title-text h1 {
+      margin: 0;
+  }
+
+  .sm-title {
+    font-size: 13px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+
+  .title-text {
+    left: 0;
+  }
+
+  div.metadata-content {
+    padding: 0;
+  }
+
+  div#metadata-section div.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  div.mods-display {
+    overflow: auto;
+  }
+  table.data-table td {
+    padding: 12px 6px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  div#collections > .row > div:not(:first-child) dl.item {
+      margin-top: 50px;
+  }
+
+  div#collections .row:not(:first-child) {
+      border-top-style: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body {
+      font-size: 14px;
+  }
+
+  div.banner-search {
+      right: 0;
+      margin-top: 20px;
+  }
+
+  div.banner-search > form {
+      float: none;
+      margin: 0 auto; 
+      width: 79%;
+  }
+
+  div#title-banner {
+    height: 180px;
+  }
+
+  div#search-results-wrapper {
+    margin-top: 45px;
+  }
+
+  div.collections-wrapper {
+    margin-top: 40px;
+  }
+
+  div.facets .panel {
+    padding: 10px 16px;
+  }
+
+  div#collections .row:not(:first-child) {
+    margin-top: 8vw;
+  }
+
+  div.paginator-nav {
+    margin-bottom: 15px;
+  }
+
+  div.search-results div.search-result:not(:first-child) {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #e5e3e1;
+  }
+/*
+  #uv {
+    height: 670px;
+  }
+
+  .uv .mainPanel .container > div {
+    height: 377px !important;
+    margin-top: 44.5px !important;
+  }*/
+}
+
+@media screen and (max-width: 991px) {
+  form#daterange-form input {
+   /* width: 100%;*/
+  }
+  form#daterange-form input:not(.daterange-slider) {
+    max-width: 97%;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1223px) {
+  div.paginator {
+    margin: 35px 0 0 0;
+  }
+
+  .content {
+    width: 95%;
+  }
+}
+
+/* Super Small devices */
+@media (min-width: 320px) and (max-width: 479px) {
+  div.banner-search > form {
+      width: 90%;
+  }
+
+  div#title-banner {
+      height: 160px;
+  }
+
+  div#uv, div.uv {
+    height: 500px;
+  }
+
+  div#viewer {
+    height: 450px;
+  }
+
+  div#uv #content .container {
+    bottom: 60px;
+  }
+
+  div.openseadragon-canvas canvas {
+    bottom: 120px;
+  }
+
+  div#metadata-section .container {
+    width: 95%;
+  }
+}
+
+/* Small devices (phones, up to 575px) */
+@media (min-width: 480px) and (max-width: 575px) {
+  .logo h1 {
+    font-size: 2.5em;
+  }
+
+  div.logo h1 {
+    min-height: 153px;
+  }
+
+  div.intro-text {
+      margin-top: 90px;
+  }
+
+  .welcomeBox .title1 {
+      font-size: 38px;
+    }
+
+  .section {
+      /*margin-top: 50px;*/
+  }
+  
+  .searchform {
+    top: 60px;
+    width: 90%;
+  }
+
+  .searchform input {
+    padding: 15px 7px;
+  }
+
+  .search-element {
+      height: 40px;
+  }
+
+  .wide-container {
+    width: 78%;
+  }
+
+  div#uv {
+    height: 600px;
+  }
+
+  div#viewer {
+    height: 600px;
+  }
+
+  div.openseadragon-canvas canvas {
+    bottom: 50px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .logo h1 {
+    font-size: 3em;
+  }
+
+  div.intro-text {
+      margin-top: 86px;
+  }
+
+  .welcomeBox .title1 {
+      font-size: 31px;
+    }
+
+    .welcomeBox .description {
+      font-size: 0.9em;
+    }
+
+  .section {
+      /*margin-top: 50px;*/
+  }
+
+  .searchform {
+      width: 80%;
+  }
+
+  .search-element {
+      height: 40px;
+  }
+
+  .wide-container {
+    width: 85%;
+  }
+
+  .item-title a {
+    font-size: 14px;
+  }
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  div.section h3 {
+    font-size: 1.3em;
+  }
+
+  .logo h1 {
+    font-size: 3.2em;
+  }
+
+  div.intro-text {
+      margin-top: 100px;
+  }
+
+  .wide-container {
+    width: 95%;
+  }
+
+  .welcomeBox .title1 {
+      font-size: 37px;
+    }
+
+    .welcomeBox .description {
+      font-size: 0.9em;
+    }
+
+  .section {
+      /*margin-top: 70px;*/
+  }
+
+  .searchform {
+    width: 72%;
+  }
+
+  .search-element {
+      height: 40px;
+  }
+
+  div#sidebar {
+      padding: 0;
+  }
+
+  .facet-thumbnail > img {
+      width: 17px;
+      height: 18px;
+  }
+
+  div.facets .facet-count > div {
+      padding-right: 2px;
+  }
+
+  div.facets ul {
+      font-size: 10px;
+  }
+
+  .item-title a {
+    font-size: 12px;
+  }
+
+  div.facets .panel {
+      padding: 10px 0px;
+  }
+
+  div.home-facets {
+    margin: 2.5em 0;
+  }
+}
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1223px) {
+  .logo h1 {
+      font-size: 3.4em;
+  }
+
+  .searchform {
+    width: 55%;
+  }
+
+  div#sidebar {
+      padding: 0;
+  }
+
+  .wide-container {
+      width: 93%;
+  }
+
+  .facet-thumbnail > img {
+      width: 22px;
+      height: 20px;
+  }
+
+  div.facets .facet-count > div {
+      padding-right: 0px;
+  }
+
+  div.facets ul {
+      font-size: 11px;
+  }
+
+  .item-title a {
+      font-size: 13px;
+  }
+
+  div.facets .panel {
+      padding: 10px 6px;
+  }
+}
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+/* Styles */
+  .logo h1 {
+      font-size: 4.4em;
+  }
+
+  div.facets .panel {
+      padding: 10px 6px;
+  }
+}
+
+@media (min-width: 1224px) and (max-width: 1399px) {
+  div.facets .panel {
+      padding: 10px 3px;
+  }
+
+  div.facets ul {
+      font-size: 13px;
+  }
+
+  div.facets .list-group-item {
+    padding: 0.4rem 14px;
+    border: none;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1699px) {
+  div.facets .panel {
+      padding: 10px 8px;
+  }
+
+  div#sidebar {
+      padding: 0;
+  }
+
+  .facet-thumbnail > img {
+      width: 24px;
+      height: 24px;
+  }
+
+  div.facets ul {
+      font-size: 13px;
+  }
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+/* Styles */
+}

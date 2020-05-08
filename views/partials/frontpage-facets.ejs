@@ -1,0 +1,59 @@
+<div class="facets home-facets">
+  <button id="type-facet" alt="Type" class="accordion active">
+    <h4>Type</h4><i class="fas fa-caret-down facet-caret"></i>
+  </button>
+
+  <div class="static-facets panel">
+    <!-- Static type facet list -->
+    <ul class="list-group">
+      <% for(var key in typeCount) { %>
+        <li class="list-group-item">
+          <div class="row">
+            <% if(facetThumbnails.Type[key]) { %>
+              <div class="col-md-2-nostack facet-thumbnail"><img src="<%= facetThumbnails.Type[key] %>" alt="<%= key %>"/></div>
+            <% } else { %>
+              <div class="col-md-2-nostack facet-thumbnail"><div style="min-height: 25px"></div></div>
+            <% } %>
+            <div class="col-md-8-nostack facet-name"><a onclick="selectFacet('Type', '<%= typeCount[key].key %>', '<%= root_url %>')"><%= key %></a></div>
+            <div class="col-md-2-nostack facet-count"><div>(<%= typeCount[key].count %>)</div></div>
+          </div>
+        </li>
+      <% } %>
+
+    </ul>
+  </div>
+
+  <!-- dynamic facet list -->
+  <% for(var key in facets) { %>
+    <% if(key != 'Type' && key != 'type') { %>
+      <button class="accordion" alt="<%= key %>">
+        <h4><%= key %></h4><i class="fas fa-caret-right facet-caret"></i>
+      </button>
+      <%- facets[key] %>
+    <% } %>
+  <% } %>
+
+  <script type="text/javascript">
+    function selectFacet(facetType, facet, baseUrl) {
+
+      // Get search querystring
+      var searchUrl = encodeURI("/search?type=all&q=&f[" + facetType + "][]=" + facet);
+      //return baseUrl + searchUrl;
+      window.location.assign(baseUrl + searchUrl);
+    };
+
+    function removeFacet(facetType, facet, baseUrl) {
+
+      // Get the facet param string to remove from the search querystring
+      var facetParam = "&f[" + facetType + "][]=" + facet;
+
+      // Get current search querystring
+      var searchUrl = decodeURIComponent(window.location.href.replace(baseUrl, ""))
+
+      // Remove the selected facet param from the search querystring
+      var searchUrl = encodeURI(url.replace(facetParam, ""));
+      //return baseUrl + searchUrl;
+      window.location.assign(baseUrl + searchUrl);
+    };
+  </script>
+</div>
