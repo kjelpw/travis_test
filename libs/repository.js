@@ -15,11 +15,11 @@
 */
 
  /**
- * @file 
+ * @file
  *
- * Repository Interface 
+ * Repository Interface
  * DU Duraspace Resource Access
- * 
+ *
  */
 
 'use strict';
@@ -37,10 +37,10 @@ const domain = config.repositoryDomain,
 /**
  * No Duraspace api for this function
  *
- * @param 
+ * @param
  * @return 
  */
-exports.getRootCollections = function() {
+exports.ggetRootCollections = function() {
 	return new Promise(function(fulfill, reject) {
 		fulfill([]);
 	});
@@ -49,8 +49,8 @@ exports.getRootCollections = function() {
 /**
  * No Duraspace api for this function
  *
- * @param 
- * @return 
+ * @param
+ * @return
  */
 exports.getCollectionObjects = function(collectionID, facets) {
 	return new Promise(function(fulfill, reject) {
@@ -59,12 +59,12 @@ exports.getCollectionObjects = function(collectionID, facets) {
 }
 
 /**
- * Return the repository domain with or without auth credentials 
+ * Return the repository domain with or without auth credentials
  *
  * @return {String} - Duraspace domain url
  */
 var getRepositoryUrl = function() {
-	var url = "", auth = "";	
+	var url = "", auth = "";
 
 	// Add authentication credentials if present
 	if((uname && uname != "") && (pword && pword != "")) {
@@ -104,7 +104,7 @@ exports.getDatastreamUrl = function(dsid, pid=null, object) {
  * @param {Object} object - The object
  * @param {String} dsid - The DDU datastream ID
  *
- * @callback callback 
+ * @callback callback
  * @param {String|null} Error message or null
  * @param {file stream|null} Null if error
  *
@@ -123,7 +123,7 @@ exports.streamData = function(object, dsid, callback) {
 		}
 		else {url += ("/" + object.object)}
 
-		// Fetch the stream 
+		// Fetch the stream
 		rs(url, {}, function(err, res) {
 			if(err) {
 				callback("Could not open datastream. " + err + " Check connection to repository", null);
@@ -131,7 +131,7 @@ exports.streamData = function(object, dsid, callback) {
 			else {
 				if(res.statusCode == 200) {
 					callback(null, res);
-				} 
+				}
 				else {
 					//console.log("Can not stream data from repository for object " + (object.pid || "") + ", request status " + res.statusCode);
 					callback(null, null);
