@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - 7
-test: skip
 install:
   - npm install
+script:
+- echo "skipping tests"
