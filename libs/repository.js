@@ -38,9 +38,9 @@ const domain = config.repositoryDomain,
  * No Duraspace api for this function
  *
  * @param
- * @return 
+ * @return
  */
-exports.ggetRootCollections = function() {
+exports.getRootCollections = function() {
 	return new Promise(function(fulfill, reject) {
 		fulfill([]);
 	});
