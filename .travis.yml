@@ -4,8 +4,8 @@ node_js:
 services:
   - elasticsearch
 install:
-  - npm install
+  - sudo npm install
 before_script:
-  - sleep 10
+  - sleep 100
 script:
 - echo "skipping tests"
