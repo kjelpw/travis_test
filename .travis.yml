@@ -4,7 +4,7 @@ node_js:
 services:
   - elasticsearch
 install:
-  - sudo npm install
+  - npm install
 before_script:
   - sleep 100
 script:
