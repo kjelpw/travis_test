@@ -30,6 +30,7 @@
     "nocache": "^2.1.0",
     "node-fetch": "^2.6.0",
     "request-stream": "^1.2.2",
+    "mocha": "^7.1.2",
     "sanitize-html": "^1.23.0"
   },
   "devDependencies": {
