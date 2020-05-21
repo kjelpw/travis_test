@@ -1,0 +1,9 @@
+.DS_Store
+.env
+node_modules/
+*.sh
+files/default/thumbnail/*
+files/default/object/*
+cache/thumbnail/*
+cache/object/*
+config/config.js
