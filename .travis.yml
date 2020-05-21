@@ -5,6 +5,5 @@ services:
   - elasticsearch
 install:
   - npm install
-  - npm install --global mocha
 before_script:
   - sleep 100
