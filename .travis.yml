@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - lts/*
+  - 6.17.1
 services:
   - elasticsearch
 install:
   - npm install
 before_script:
   - sleep 100
+  - "mocha --version"
