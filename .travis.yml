@@ -7,4 +7,3 @@ install:
   - npm install
 before_script:
   - sleep 100
-  - "mocha --version"
