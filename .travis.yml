@@ -1,11 +1,12 @@
 language: node_js
 node_js:
-  - lts/*
+  - 10.16.3
 services:
   - elasticsearch
 install:
   - npm install
 before_script:
   - sleep 100
+  - sudo service elasticsearch start
   - node discovery.js
   - sleep 10
