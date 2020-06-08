@@ -7,3 +7,5 @@ install:
   - npm install
 before_script:
   - sleep 100
+  - node discovery.js
+  - sleep 1000
