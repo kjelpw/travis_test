@@ -1,8 +1,16 @@
+sudo: required
 language: node_js
 node_js:
   - 10.16.3
+env:
+  global:
+    - CXX=g++-4.8
+    - CHROME_BIN=/usr/bin/google-chrome
+    - DISPLAY=:99.0
 services:
   - elasticsearch
+addons:
+  chrome: stable
 install:
   - npm install
 before_script:
@@ -11,3 +19,8 @@ before_script:
   - curl -v http://localhost:9200/
   - node discovery.js &
   - sleep 10
+script:
+  - sudo apt update
+  - sudo apt install openjdk-8-jdk
+  - 'java --version'
+  - npm test
