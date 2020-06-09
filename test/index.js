@@ -5,7 +5,7 @@ const webdriver = require('selenium-webdriver');
 const assert = require('assert');
 var chrome = require('selenium-webdriver/chrome');
 var path = require('chromedriver').path;
-const frontend = 'http://localhost:9006';  // change to local environment or travis environment url
+const frontend = 'http://localhost:9007';  // change to local environment or travis environment url
 
 // handles ssl cert if it's available on test domains.
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
