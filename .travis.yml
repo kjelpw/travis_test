@@ -9,5 +9,5 @@ before_script:
   - sleep 100
   - sudo service elasticsearch start
   - curl -v http://localhost:9200/
-  - node discovery.js
+  - node discovery.js &
   - sleep 10
