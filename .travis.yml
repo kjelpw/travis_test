@@ -23,4 +23,5 @@ script:
   - 'java --version'
   - node discovery.js &
   - sleep 10
+  - curl http://localhost:9007/search
   - npm test
