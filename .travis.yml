@@ -17,10 +17,10 @@ before_script:
   - sleep 100
   - sudo service elasticsearch start
   - curl -v http://localhost:9200/
-  - node discovery.js &
-  - sleep 10
 script:
   - sudo apt update
   - sudo apt install openjdk-8-jdk
   - 'java --version'
+  - node discovery.js &
+  - sleep 10
   - npm test
