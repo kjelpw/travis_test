@@ -17,7 +17,7 @@ describe('Tests if tests are working', function(){
       assert.equal(1, 1);
     });
 });
-
+console.log(frontend + '/');
 // Integration tests
 describe('GET special collections home page test', function() { // Test description
     it('responds with HTML 200 response', function(done) {
