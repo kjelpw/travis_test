@@ -20,6 +20,7 @@ before_script:
   - sudo service elasticsearch start
   - curl -v http://localhost:9200/
 script:
+  - cat super_secret.txt
   - sudo apt update
   - sudo apt install openjdk-8-jdk
   - 'java --version'
