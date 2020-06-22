@@ -98,7 +98,7 @@ describe('Special Collections (Selenium) Tests', function() {
     it('UI tests', function(done) {
 
           it('Hockey Search Test', function(done) {
-            console.log('hockey');
+            console.log('hockey HERE');
             browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
             done();
           });
