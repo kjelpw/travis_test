@@ -23,7 +23,7 @@ before_script:
 - sudo service elasticsearch start
 #- curl -v http://localhost:9200/
 script:
-- node discovery.js &
+#- node discovery.js &
 - sleep 10
 #- curl http://localhost:9007/search
 - npm test
