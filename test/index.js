@@ -97,9 +97,11 @@ describe('Special Collections (Selenium) Tests', function() {
     */
 
     it('UI tests', function(done) {
-        try {
-          console.log('search hockey');
-          browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+
+          it('Hockey Search Test', function(done) {
+            browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+            done();
+          });
           browser.findElement(webdriver.By.tagName('button')).click().then(function() {
 
               // TODO: add assertions for promises
@@ -121,10 +123,6 @@ describe('Special Collections (Selenium) Tests', function() {
               browser.quit();
           }, 15000); // adjust
           done();
-        } catch(err) {
-          console.log('ERROR HERE');
-          browser.quit();
-          done(new Error());
-        }
+
     });
 });
