@@ -112,13 +112,13 @@ describe('Special Collections (Selenium) Tests', function() {
     });
     */
 
-    it('UI tests', function(done) {
+    describe('UI tests', function() {
+      it('Hockey Search Test', function(done) {
+        console.log('hockey HERE');
+        return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+      });
 
-          it('Hockey Search Test', function(done) {
-            console.log('hockey HERE');
-            browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
-            done();
-          });
+      it('Rest of tests', function(done) {
           browser.findElement(webdriver.By.tagName('button')).click().then(function() {
 
               // TODO: add assertions for promises
@@ -140,6 +140,7 @@ describe('Special Collections (Selenium) Tests', function() {
               browser.quit();
           }, 15000); // adjust
           done();
+        });
 
     });
 });
