@@ -17,6 +17,23 @@ describe('Tests if tests are working', function(){
       assert.equal(1, 1);
     });
 });
+
+describe('Promise tests', function () {
+  it('promise should pass', function () {
+    let promise = new Promise(function(resolve, reject) {
+      setTimeout(() => resolve('done'), 1000);
+    });
+    return promise;
+  });
+
+  it('this test should fail', function() {
+    let promise = new Promise(function(resolve, reject) {
+      setTimeout(() => reject('purposeful failure'), 1000);
+    });
+    return promise;
+  });
+});
+
 // Integration tests
 describe('GET special collections home page test', function() { // Test description
     it('responds with HTML 200 response', function(done) {
