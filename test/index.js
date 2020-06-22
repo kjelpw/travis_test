@@ -113,12 +113,13 @@ describe('Special Collections (Selenium) Tests', function() {
     */
 
     describe('UI tests', function() {
-      it('Hockey Search Test', function(done) {
+      it('Hockey Search Test', function() {
+        //this should be try catch?
         console.log('hockey HERE');
         return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
       });
 
-      it('Rest of tests', function(done) {
+      it('Find button test', function(done) {
           browser.findElement(webdriver.By.tagName('button')).click().then(function() {
 
               // TODO: add assertions for promises
