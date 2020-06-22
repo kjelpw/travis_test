@@ -18,7 +18,6 @@ before_script:
 - sudo service elasticsearch start
 - curl -v http://localhost:9200/
 script:
-- echo "$(<super_secret.txt)"
 - sudo apt update
 - sudo apt install openjdk-8-jdk
 - java --version
@@ -27,5 +26,5 @@ script:
 - curl http://localhost:9007/search
 - npm test
 before_install:
-- openssl aes-256-cbc -K $encrypted_355e94ba1091_key -iv $encrypted_355e94ba1091_iv
-  -in super_secret.txt.enc -out super_secret.txt -d
+- openssl aes-256-cbc -K $encrypted_3c84dcdc6bbe_key -iv $encrypted_3c84dcdc6bbe_iv
+  -in .env.enc -out .env -d
