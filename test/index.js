@@ -117,7 +117,7 @@ describe('Special Collections (Selenium) Tests', function() {
         return browser.quit();
       });
       it('Should get hockey', async function() {
-        browser.getTitle().then(function(title){
+        return browser.getTitle().then(function(title){
           assert(title, 'Digital Collections @ DU');
         });
       });
