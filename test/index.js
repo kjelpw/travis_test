@@ -101,47 +101,59 @@ describe('Special Collections (Selenium) Tests', function() {
     });
 
     // executes after each test
-    /*
-    afterEach(function(done) {
 
-        setTimeout(function() {
-            console.log('quit.');
-            browser.quit();
-        }, 15000); // adjust
+    // afterEach(function(done) {
+    //
+    //     setTimeout(function() {
+    //         console.log('quit.');
+    //         browser.quit();
+    //     }, 15000); // adjust
+    //
+    // });
 
+    before(function() {
+      browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
     });
-    */
-
-    describe('UI tests', function() {
-      it('Hockey Search Test', function() {
-        //this should be try catch?
-        console.log('hockey HERE');
-        return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
-      });
-
-      it('Find button test', function(done) {
-          browser.findElement(webdriver.By.tagName('button')).click().then(function() {
-
-              // TODO: add assertions for promises
-              console.log('click accordion');
-              browser.findElement(webdriver.By.className('accordion')).click().then(function() {
-
-                  // TODO: add assertions
-                  console.log('find facet');
-                  let facet = browser.findElement(webdriver.By.className('facet-name'));
-                  facet.findElement(webdriver.By.tagName('a')).click();
-
-                  // TODO: add assertions
-                  // assert.equal('', '');
-
-              });
-          });
-          setTimeout(function() {
-              console.log('quit.');
-              browser.quit();
-          }, 15000); // adjust
-          done();
+    after(function() {
+      return browser.quit();
+    });
+    describe('UI tests using async', function() {
+      it('Should get hockey', async function() {
+        browser.getTitle().then(function(title){
+          assert(title, 'Digital Collections @ DU');
         });
-
+      });
     });
+
+    // describe('UI tests', function() {
+    //   it('Hockey Search Test', function() {
+    //     console.log('hockey HERE');
+    //     assert.notequal(browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey'), null);
+    //   });
+    //
+    //   it('Find button test', function(done) {
+    //       browser.findElement(webdriver.By.tagName('button')).click().then(function() {
+    //
+    //           // TODO: add assertions for promises
+    //           console.log('click accordion');
+    //           browser.findElement(webdriver.By.className('accordion')).click().then(function() {
+    //
+    //               // TODO: add assertions
+    //               console.log('find facet');
+    //               let facet = browser.findElement(webdriver.By.className('facet-name'));
+    //               facet.findElement(webdriver.By.tagName('a')).click();
+    //
+    //               // TODO: add assertions
+    //               // assert.equal('', '');
+    //
+    //           });
+    //       });
+    //       setTimeout(function() {
+    //           console.log('quit.');
+    //           browser.quit();
+    //       }, 15000); // adjust
+    //       done();
+    //     });
+    //
+    // });
 });
