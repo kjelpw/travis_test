@@ -81,7 +81,7 @@ describe('GET special collections object details', function() {
 // https://www.toolsqa.com/selenium-webdriver/find-element-selenium/
 // https://www.toolsqa.com/selenium-webdriver/webelement-commands/
 // ** you can also use a driver for firefox and safari
-let browser;
+var browser;
 
 var service = new chrome.ServiceBuilder(path).build();
 chrome.setDefaultService(service);
@@ -89,7 +89,7 @@ chrome.setDefaultService(service);
 describe('Special Collections (Selenium) Tests', function() {
 
     // executes before each test
-    beforeEach(function(done) {
+    before(function() {
         var opts = new chrome.Options()
         .addArguments('--no-sandbox').addArguments('--disable-dev-shm-usage').addArguments('--headless');
         browser = new webdriver.Builder().
@@ -97,7 +97,6 @@ describe('Special Collections (Selenium) Tests', function() {
         // withCapabilities(webdriver.Capabilities.safari()).
         // withCapabilities(webdriver.Capabilities.firefox()).
         browser.get(frontend);
-        done();
     });
 
     // executes after each test
@@ -110,14 +109,13 @@ describe('Special Collections (Selenium) Tests', function() {
     //     }, 15000); // adjust
     //
     // });
-
-    before(function() {
-      browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
-    });
-    after(function() {
-      return browser.quit();
-    });
-    describe('UI tests using async', function() {
+    describe('Hockey test', function() {
+      before(function() {
+        browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+      });
+      after(function() {
+        return browser.quit();
+      });
       it('Should get hockey', async function() {
         browser.getTitle().then(function(title){
           assert(title, 'Digital Collections @ DU');
