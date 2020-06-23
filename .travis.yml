@@ -22,7 +22,7 @@ install:
 before_script:
 - sudo service elasticsearch start
 - sleep 50
-- curl -PUT ELASTICSEARCH_URL'/test_index' -d
+- curl -PUT ELASTICSEARCH_URL'/test_index'
 #- curl -v http://localhost:9200/
 script:
 - node discovery.js &
