@@ -7,6 +7,7 @@ env:
   - CXX=g++-4.8
   - CHROME_BIN=/usr/bin/google-chrome
   - DISPLAY=:99.0
+  - ELASTICSEARCH_URL=http://localhost:9200/
 services:
 - elasticsearch
 addons:
@@ -19,8 +20,9 @@ install:
 - sudo apt update
 - sudo apt install openjdk-8-jdk
 before_script:
-- sleep 50
 - sudo service elasticsearch start
+- sleep 50
+- PUT http://localhost:9200/test_index
 #- curl -v http://localhost:9200/
 script:
 - node discovery.js &
