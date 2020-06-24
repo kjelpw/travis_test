@@ -81,7 +81,7 @@ chrome.setDefaultService(service);
 
 describe('Special Collections (Selenium) Tests', function() {
 
-    // executes before each test
+    // executes before everything
     before(function() {
         var opts = new chrome.Options()
         .addArguments('--no-sandbox').addArguments('--disable-dev-shm-usage').addArguments('--headless');
@@ -89,62 +89,50 @@ describe('Special Collections (Selenium) Tests', function() {
         withCapabilities(webdriver.Capabilities.chrome()).setChromeOptions(opts).build();
         // withCapabilities(webdriver.Capabilities.safari()).
         // withCapabilities(webdriver.Capabilities.firefox()).
-        browser.get(frontend);
     });
 
-    // executes after each test
+    //closes the browser when done
+    after(function() {
+      return browser.quit();
+    });
 
-    // afterEach(function(done) {
-    //
-    //     setTimeout(function() {
-    //         console.log('quit.');
-    //         browser.quit();
-    //     }, 15000); // adjust
-    //
-    // });
-    describe('Hockey test', function() {
-      before(function() {
-        browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+    describe('UI Tests', function () {
+      //starts on the main page each time
+      beforeEach(function (){
+        browser.get(frontend);
       });
-      after(function() {
-        return browser.quit();
-      });
-      it('Should get hockey', async function() {
-        return browser.getTitle().then(function(title){
-          assert(title, 'Digital Collections @ DU');
+
+      describe('Hockey test', function() {
+        before(function() {
+          browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+        });
+        it('Should get hockey', async function() {
+          return browser.getTitle().then(function(title){
+            //test if the search for hockey worked
+            assert(title, 'Digital Collections @ DU');
+          });
         });
       });
-    });
 
-    // describe('UI tests', function() {
-    //   it('Hockey Search Test', function() {
-    //     console.log('hockey HERE');
-    //     assert.notequal(browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey'), null);
-    //   });
-    //
-    //   it('Find button test', function(done) {
-    //       browser.findElement(webdriver.By.tagName('button')).click().then(function() {
-    //
-    //           // TODO: add assertions for promises
-    //           console.log('click accordion');
-    //           browser.findElement(webdriver.By.className('accordion')).click().then(function() {
-    //
-    //               // TODO: add assertions
-    //               console.log('find facet');
-    //               let facet = browser.findElement(webdriver.By.className('facet-name'));
-    //               facet.findElement(webdriver.By.tagName('a')).click();
-    //
-    //               // TODO: add assertions
-    //               // assert.equal('', '');
-    //
-    //           });
-    //       });
-    //       setTimeout(function() {
-    //           console.log('quit.');
-    //           browser.quit();
-    //       }, 15000); // adjust
-    //       done();
-    //     });
-    //
-    // });
+      //further tests
+      describe('Accordion test', function() {
+        it('Find button test', function(done) {
+            browser.findElement(webdriver.By.tagName('button')).click().then(function() {
+              // TODO: add assertions for promises
+              console.log('click accordion');
+              browser.findElement(webdriver.By.className('accordion')).click().then(function() {
+
+                  // TODO: add assertions
+                  console.log('find facet');
+                  let facet = browser.findElement(webdriver.By.className('facet-name'));
+                  facet.findElement(webdriver.By.tagName('a')).click();
+
+                  // TODO: add assertions
+                  // assert.equal('', '');
+
+              });
+            });
+          });
+      });
+    });
 });
