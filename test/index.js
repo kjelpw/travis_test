@@ -125,7 +125,9 @@ describe('Special Collections (Selenium) Tests', function() {
                   // TODO: add assertions
                   console.log('find facet');
                   let facet = browser.findElement(webdriver.By.className('facet-name'));
-                  facet.findElement(webdriver.By.tagName('a')).click();
+                  facet.findElement(webdriver.By.tagName('a')).click().then(function(){
+                    done();
+                  });
 
                   // TODO: add assertions
                   // assert.equal('', '');
