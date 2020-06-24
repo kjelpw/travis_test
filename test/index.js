@@ -19,16 +19,9 @@ describe('Tests if tests are working', function(){
 });
 
 describe('Promise tests', function () {
-  it('promise should pass', function () {
+  it('Promise should pass', function () {
     let promise = new Promise(function(resolve, reject) {
       setTimeout(() => resolve('done'), 1000);
-    });
-    return promise;
-  });
-
-  it('this test should fail', function() {
-    let promise = new Promise(function(resolve, reject) {
-      setTimeout(() => reject('purposeful failure'), 1000);
     });
     return promise;
   });
