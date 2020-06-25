@@ -104,7 +104,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
       describe('Hockey test', function() {
         before(function() {
-          browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+          return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
         it('Should get hockey', async function() {
           return browser.getTitle().then(function(title) {
