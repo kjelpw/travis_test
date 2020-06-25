@@ -99,6 +99,7 @@ describe('Special Collections (Selenium) Tests', function() {
     describe('UI Tests', function () {
       //starts on the main page each time
       beforeEach(function (){
+        console.log('');
         browser.get(frontend);
       });
 
