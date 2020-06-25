@@ -17,10 +17,10 @@ before_install:
   -in .env.enc -out .env -d
 install:
 - npm install
-- apt update
-- apt install openjdk-8-jdk
+- sudo apt update
+- sudo apt install openjdk-8-jdk
 before_script:
-- service elasticsearch start
+- sudo service elasticsearch start
 - sleep 50
 - curl -PUT 'http://localhost:9200/test_index'
 #- curl -v http://localhost:9200/
