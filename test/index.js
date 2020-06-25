@@ -107,7 +107,7 @@ describe('Special Collections (Selenium) Tests', function() {
           browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
         it('Should get hockey', async function() {
-          return browser.getTitle().then(function(title){
+          return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
             assert(title, 'Digital Collections @ DU');
           });
