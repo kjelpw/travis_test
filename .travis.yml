@@ -22,7 +22,7 @@ install:
 before_script:
 - sudo service elasticsearch start
 - sleep 50
-- curl -XPUT http://localhost:9200/repo_public
+- curl -XPUT http://localhost:9200/repo_public -d @test/index_schema.json
 #- curl -v http://localhost:9200/
 script:
 - node discovery.js &
