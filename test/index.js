@@ -109,32 +109,33 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Should get hockey', async function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
+            console.log('assert hockey title');
             assert(title, 'Digital Collections @ DU');
           });
         });
       });
 
       //further tests
-      describe('Accordion test', function() {
-        it('Find button test', function(done) {
-            browser.findElement(webdriver.By.tagName('button')).click().then(function() {
-              // TODO: add assertions for promises
-              console.log('click accordion');
-              browser.findElement(webdriver.By.className('accordion')).click().then(function() {
-
-                  // TODO: add assertions
-                  console.log('find facet');
-                  let facet = browser.findElement(webdriver.By.className('facet-name'));
-                  facet.findElement(webdriver.By.tagName('a')).click().then(function(){
-                    done();
-                  });
-
-                  // TODO: add assertions
-                  // assert.equal('', '');
-
-              });
-            });
-          });
-      });
+      // describe('Accordion test', function() {
+      //   it('Find button test', function(done) {
+      //       browser.findElement(webdriver.By.tagName('button')).click().then(function() {
+      //         // TODO: add assertions for promises
+      //         console.log('click accordion');
+      //         browser.findElement(webdriver.By.className('accordion')).click().then(function() {
+      //
+      //             // TODO: add assertions
+      //             console.log('find facet');
+      //             let facet = browser.findElement(webdriver.By.className('facet-name'));
+      //             facet.findElement(webdriver.By.tagName('a')).click().then(function(){
+      //               done();
+      //             });
+      //
+      //             // TODO: add assertions
+      //             // assert.equal('', '');
+      //
+      //         });
+      //       });
+      //     });
+      // });
     });
 });
