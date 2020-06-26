@@ -1,0 +1,512 @@
+// Object 1
+{
+        "pid": "7479257d-3c34-4e87-8358-05460a828ca1",
+        "is_member_of_collection": "1e1fce45-dd23-48bd-a8cf-5654a83d989b",
+        "handle": "http://hdl.handle.net/10176/7479257d-3c34-4e87-8358-05460a828ca1",
+        "thumbnail": "2c58/eff8/dc59/41c5/acbd/e696/7542/a8fc/1e1fce45-dd23-48bd-a8cf-5654a83d989b_U116.01.0001.01683_transfer-7479257d-3c34-4e87-8358-05460a828ca1/thumbnails/b8029159-0113-42a5-b995-7084e66ebd18.jpg",
+        "object": "2c58/eff8/dc59/41c5/acbd/e696/7542/a8fc/1e1fce45-dd23-48bd-a8cf-5654a83d989b_U116.01.0001.01683_transfer-7479257d-3c34-4e87-8358-05460a828ca1/objects/b8029159-0113-42a5-b995-7084e66ebd18-U116.01.0001.01683.jp2",
+        "mime_type": "image/tiff",
+        "uri": "/repositories/2/archival_objects/83349",
+        "object_type": "object",
+        "is_published": "1",
+        "is_compound": 0,
+        "title": "Founders Bell, 2008 November 19",
+        "creator": "Armstrong, Wayne, 1961-",
+        "f_subjects": [
+            "Universities and colleges",
+            "Colorado",
+            "Denver (Colo.)",
+            "Publicity photographs",
+            "University of Denver"
+        ],
+        "abstract": "The Founders Bell, situated in front of the alumni center at the time this photo was taken. The inscription on the bell reads, ''Rio Grand, John Evans, Chairman of the Board.'' The inscription on the plaque reads: ''Dedicated with pride to the University of Denver by Leo K. Goto, BSBA '67, MBA '74.''.",
+        "type": "still image",
+        "display_record": {
+            "title": "Founders Bell, 2008 November 19",
+            "uri": "/repositories/2/archival_objects/83349",
+            "identifiers": [
+                {
+                    "type": "local",
+                    "identifier": "U116.01.0001.01683"
+                }
+            ],
+            "resource_type": "still image",
+            "dates": [
+                {
+                    "encoding": "w3cdtf",
+                    "label": "creation",
+                    "type": "single",
+                    "expression": "2008 November 19",
+                    "begin": "2008-11-19"
+                }
+            ],
+            "extents": [
+                "1 items (whole)"
+            ],
+            "subjects": [
+                {
+                    "authority": "lcsh",
+                    "title": "Universities and colleges",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Universities and colleges"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85141086"
+                },
+                {
+                    "authority": "lcnaf",
+                    "title": "Colorado",
+                    "terms": [
+                        {
+                            "type": "geographic",
+                            "term": "Colorado"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/names/n80125532"
+                },
+                {
+                    "authority": "lcnaf",
+                    "title": "Denver (Colo.)",
+                    "terms": [
+                        {
+                            "type": "geographic",
+                            "term": "Denver (Colo.)"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/names/n79055157"
+                },
+                {
+                    "authority": "tgm",
+                    "title": "Publicity photographs",
+                    "terms": [
+                        {
+                            "type": "genre_form",
+                            "term": "Publicity photographs"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/vocabulary/graphicMaterials/tgm008390"
+                },
+                {
+                    "authority": "naf",
+                    "title": "University of Denver",
+                    "authority_id": "http://id.loc.gov/authorities/names/n80050497"
+                }
+            ],
+            "notes": [
+                {
+                    "type": "odd",
+                    "content": "born digital Title from creator's filename."
+                },
+                {
+                    "type": "abstract",
+                    "content": "The Founders Bell, situated in front of the alumni center at the time this photo was taken. The inscription on the bell reads, ''Rio Grand, John Evans, Chairman of the Board.'' The inscription on the plaque reads: ''Dedicated with pride to the University of Denver by Leo K. Goto, BSBA '67, MBA '74.''."
+                },
+                {
+                    "type": "phystech",
+                    "content": "image/tiff     color"
+                },
+                {
+                    "type": "userestrict",
+                    "content": "Copyright University of Denver"
+                }
+            ],
+            "names": [
+                {
+                    "title": "Armstrong, Wayne, 1961-",
+                    "source": "local",
+                    "role": "creator"
+                }
+            ],
+            "parts": [
+                {
+                    "order": "1",
+                    "title": "U116.01.0001.01683.tif",
+                    "type": "image/tiff",
+                    "caption": null
+                }
+            ],
+            "is_compound": false
+        }
+    }
+
+// Object 2
+{
+        "pid": "81c733ec-b597-48d1-9488-90f2a67627ed",
+        "is_member_of_collection": "ab0ed225-3a5f-4c49-9a8e-d104a9b0845f",
+        "handle": "http://hdl.handle.net/10176/81c733ec-b597-48d1-9488-90f2a67627ed",
+        "thumbnail": "0193/031a/3f2d/4d8c/8764/e351/772e/e4ea/ab0ed225-3a5f-4c49-9a8e-d104a9b0845f_B063.02.0033.0011.00001_transfer-81c733ec-b597-48d1-9488-90f2a67627ed/thumbnails/39c25249-bb28-47b1-892c-50013e36ece3.jpg",
+        "object": "0193/031a/3f2d/4d8c/8764/e351/772e/e4ea/ab0ed225-3a5f-4c49-9a8e-d104a9b0845f_B063.02.0033.0011.00001_transfer-81c733ec-b597-48d1-9488-90f2a67627ed/objects/39c25249-bb28-47b1-892c-50013e36ece3-B063.02.0033.0011.00001.jp2",
+        "mime_type": "image/tiff",
+        "uri": "/repositories/2/archival_objects/64241",
+        "object_type": "object",
+        "is_published": "1",
+        "is_compound": 0,
+        "title": "Central High School Class of 1909, 1909",
+        "creator": "Storm Photo",
+        "f_subjects": [
+            "Classes (Groups of students)",
+            "High schools",
+            "Jewish children",
+            "Denver (Colo.)",
+            "Students",
+            "Central High School (Denver, Colo.)",
+            "Storm Photo",
+            "Stein, Irene Miller, 1894-2000"
+        ],
+        "abstract": "Students pose sitting and standing in front of the entrance to Central High School in Denver, Colorado for a class photograph. Irene Miller (Stein) is one of the students, possibly in the middle of the top row indicated by an arrow.",
+        "type": "still image",
+        "display_record": {
+            "title": "Central High School Class of 1909, 1909",
+            "uri": "/repositories/2/archival_objects/64241",
+            "identifiers": [
+                {
+                    "type": "local",
+                    "identifier": "B063.02.0033.0011.00001"
+                }
+            ],
+            "resource_type": "still image",
+            "dates": [
+                {
+                    "encoding": "w3cdtf",
+                    "label": "creation",
+                    "type": "single",
+                    "expression": "1909",
+                    "begin": "1909"
+                }
+            ],
+            "extents": [
+                "1 items (whole)"
+            ],
+            "subjects": [
+                {
+                    "authority": "lcsh",
+                    "title": "Classes (Groups of students)",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Classes (Groups of students)"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh96010588"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "High schools",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "High schools"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85060731"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Jewish children",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Jewish children"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85070263"
+                },
+                {
+                    "authority": "lcnaf",
+                    "title": "Denver (Colo.)",
+                    "terms": [
+                        {
+                            "type": "geographic",
+                            "term": "Denver (Colo.)"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/names/n79055157"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Students",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Students"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85129296"
+                },
+                {
+                    "authority": "local",
+                    "title": "Central High School (Denver, Colo.)"
+                },
+                {
+                    "authority": "local",
+                    "title": "Storm Photo"
+                },
+                {
+                    "authority": "local",
+                    "title": "Stein, Irene Miller, 1894-2000"
+                }
+            ],
+            "notes": [
+                {
+                    "type": "odd",
+                    "content": "reformatted digital Title supplied by archivist."
+                },
+                {
+                    "type": "abstract",
+                    "content": "Students pose sitting and standing in front of the entrance to Central High School in Denver, Colorado for a class photograph. Irene Miller (Stein) is one of the students, possibly in the middle of the top row indicated by an arrow."
+                },
+                {
+                    "type": "odd",
+                    "content": "Printed on a seal on the matting: ''Storm Photo.'' Handwritten on the back: ''#725, Irene Stein, Central High school, Denver, 1909.''"
+                },
+                {
+                    "type": "phystech",
+                    "content": "Good  8 x 10 inches   black and white  The photograph is mounted on 11 x 14 inch cardboard."
+                },
+                {
+                    "type": "custodhist",
+                    "content": "The photograph was donated by Irene Miller Stein."
+                },
+                {
+                    "type": "userestrict",
+                    "content": "Copyright restrictions may apply. User is responsible for all copyright compliance."
+                }
+            ],
+            "names": [
+                {
+                    "title": "Storm Photo",
+                    "source": "local",
+                    "role": "creator",
+                    "relator": "Photographer"
+                }
+            ],
+            "parts": [
+                {
+                    "order": "1",
+                    "title": "B063.02.0033.0011.00001.tif",
+                    "type": "tiff",
+                    "caption": null
+                }
+            ],
+            "is_compound": false,
+            "t_language": [
+                {
+                    "text": "English",
+                    "code": "eng",
+                    "authority": "iso639-2b"
+                }
+            ]
+        }
+    }
+
+// Object 3
+{
+        "pid": "d3dcaa18-d441-4396-9f0a-887e1277b279",
+        "is_member_of_collection": "ab0ed225-3a5f-4c49-9a8e-d104a9b0845f",
+        "handle": "http://hdl.handle.net/10176/d3dcaa18-d441-4396-9f0a-887e1277b279",
+        "thumbnail": "c0d7/fe9a/392d/4fe7/919a/82fa/db39/0a64/ab0ed225-3a5f-4c49-9a8e-d104a9b0845f_B063.02.0002.00011_transfer-d3dcaa18-d441-4396-9f0a-887e1277b279/thumbnails/f70b5b4b-0f37-42b2-b326-3f4912e6e516.jpg",
+        "object": "c0d7/fe9a/392d/4fe7/919a/82fa/db39/0a64/ab0ed225-3a5f-4c49-9a8e-d104a9b0845f_B063.02.0002.00011_transfer-d3dcaa18-d441-4396-9f0a-887e1277b279/objects/f70b5b4b-0f37-42b2-b326-3f4912e6e516-B063.02.0002.00011.jp2",
+        "mime_type": "image/tiff",
+        "uri": "/repositories/2/archival_objects/68915",
+        "object_type": "object",
+        "is_published": "1",
+        "is_compound": 0,
+        "title": "Billie Stein and Her Harmony Girls Band, circa 1925",
+        "creator": "Orpheum Studio",
+        "f_subjects": [
+            "Jews",
+            "Jewish women",
+            "Bands (Music)",
+            "Orchestra",
+            "Jewish musicians",
+            "Women musicians",
+            "Denver (Colo.)",
+            "Photographs",
+            "Musicians",
+            "Billie Stein's Harmony Girls Band"
+        ],
+        "abstract": "Billie (Lillian) Stein poses with members of her Harmony Girls Orchestra. All five female members of the group are dressed in clown costumes with a ruff at the neck. Billie Stein sits in the center on a bench.  Billie Stein started her own all-girls band at the age of 14 and traveled throughout the United States performing on her trumpet.",
+        "type": "still image",
+        "display_record": {
+            "title": "Billie Stein and Her Harmony Girls Band, circa 1925",
+            "uri": "/repositories/2/archival_objects/68915",
+            "identifiers": [
+                {
+                    "type": "local",
+                    "identifier": "B063.02.0002.00011"
+                }
+            ],
+            "resource_type": "still image",
+            "dates": [
+                {
+                    "encoding": "w3cdtf",
+                    "label": "creation",
+                    "type": "single",
+                    "expression": "circa 1925",
+                    "begin": "1925"
+                }
+            ],
+            "extents": [
+                "2 items (whole)"
+            ],
+            "subjects": [
+                {
+                    "authority": "lcsh",
+                    "title": "Jews",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Jews"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85070361"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Jewish women",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Jewish women"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85147377"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Bands (Music)",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Bands (Music)"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85011499"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Orchestra",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Orchestra"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85095325"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Jewish musicians",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Jewish musicians"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85089042"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Women musicians",
+                    "terms": [
+                        {
+                            "type": "topical",
+                            "term": "Women musicians"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85147655"
+                },
+                {
+                    "authority": "lcnaf",
+                    "title": "Denver (Colo.)",
+                    "terms": [
+                        {
+                            "type": "geographic",
+                            "term": "Denver (Colo.)"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/names/n79055157"
+                },
+                {
+                    "authority": "aat",
+                    "title": "Photographs",
+                    "terms": [
+                        {
+                            "type": "genre_form",
+                            "term": "Photographs"
+                        }
+                    ],
+                    "authority_id": "http://vocab.getty.edu/aat/300046300"
+                },
+                {
+                    "authority": "lcsh",
+                    "title": "Musicians",
+                    "terms": [
+                        {
+                            "type": "occupation",
+                            "term": "Musicians"
+                        }
+                    ],
+                    "authority_id": "http://id.loc.gov/authorities/subjects/sh85089027"
+                },
+                {
+                    "authority": "local",
+                    "title": "Billie Stein's Harmony Girls Band"
+                }
+            ],
+            "notes": [
+                {
+                    "type": "odd",
+                    "content": "reformatted digital Title supplied by archivist."
+                },
+                {
+                    "type": "abstract",
+                    "content": "Billie (Lillian) Stein poses with members of her Harmony Girls Orchestra. All five female members of the group are dressed in clown costumes with a ruff at the neck. Billie Stein sits in the center on a bench.  Billie Stein started her own all-girls band at the age of 14 and traveled throughout the United States performing on her trumpet."
+                },
+                {
+                    "type": "odd",
+                    "content": "On back of photograph: ''#194 Billie Stein's Orchestra  Billie, seated, about 1925, The Harmony Girls, Donor Mrs. Billie Stein.'' On envelope: ''#194 Billie Stein's Orchestra.''"
+                },
+                {
+                    "type": "phystech",
+                    "content": "Fair  8 x 10 inches   black and white"
+                },
+                {
+                    "type": "custodhist",
+                    "content": "Donated by Billie Stein."
+                },
+                {
+                    "type": "userestrict",
+                    "content": "Copyright restrictions may apply. User is responsible for all copyright compliance."
+                }
+            ],
+            "names": [
+                {
+                    "title": "Orpheum Studio",
+                    "source": "naf",
+                    "authority_id": "http://id.loc.gov/authorities/names/no2001061207",
+                    "role": "creator",
+                    "relator": "Photographer"
+                }
+            ],
+            "parts": [
+                {
+                    "order": "1",
+                    "title": "B063.02.0002.00011.tif",
+                    "type": "tiff",
+                    "caption": null
+                }
+            ],
+            "is_compound": false,
+            "t_language": [
+                {
+                    "text": "English",
+                    "code": "eng",
+                    "authority": "iso639-2b"
+                }
+            ]
+        }
+    }
+

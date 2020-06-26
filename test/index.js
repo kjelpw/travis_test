@@ -58,6 +58,7 @@ describe('GET special collections search with keyword term test', function() {
     });
 });
 
+//this still returns 200 if the object isn't found, should change?
 describe('GET special collections object details', function() {
     it('responds with HTML 200 response', function(done) {
         request(frontend)  // <-- pass in domain
@@ -83,6 +84,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
     // executes before everything
     before(function() {
+        console.log('selenium startup');
         var opts = new chrome.Options()
         .addArguments('--no-sandbox').addArguments('--disable-dev-shm-usage').addArguments('--headless');
         browser = new webdriver.Builder().
@@ -93,6 +95,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
     //closes the browser when done
     after(function() {
+      console.log('quitting');
       return browser.quit();
     });
 
