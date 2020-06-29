@@ -84,7 +84,6 @@ describe('Special Collections (Selenium) Tests', function() {
 
     // executes before everything
     before(function() {
-        console.log('selenium startup');
         var opts = new chrome.Options()
         .addArguments('--no-sandbox').addArguments('--disable-dev-shm-usage').addArguments('--headless');
         browser = new webdriver.Builder().
@@ -102,19 +101,17 @@ describe('Special Collections (Selenium) Tests', function() {
     describe('UI Tests', function () {
       describe('Search object tests', function() {
         before(function() {
-          console.log('getting frontend');
           return browser.get(frontend);
         });
 
         it('Search hockey', async function() {
-          console.log('Search hockey');
           return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
 
         it('Should get hockey', async function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
-            console.log('assert hockey title');
+            console.log(title);
             assert(title, 'Digital Collections @ DU');
           });
         });
