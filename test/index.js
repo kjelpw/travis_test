@@ -5,7 +5,7 @@ const webdriver = require('selenium-webdriver');
 const assert = require('assert');
 var chrome = require('selenium-webdriver/chrome');
 var path = require('chromedriver').path;
-const frontend = 'http://localhost:9007';  // change to local environment or travis environment url
+const frontend = 'https://specialcollections.du.edu/';  // change to local environment or travis environment url
 
 // handles ssl cert if it's available on test domains.
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -100,16 +100,17 @@ describe('Special Collections (Selenium) Tests', function() {
     });
 
     describe('UI Tests', function () {
-      //starts on the main page each time
-      beforeEach(function (){
-        console.log('getting frontend');
-        browser.get(frontend);
-      });
-
-      describe('Hockey test', function() {
+      describe('Search object tests', function() {
         before(function() {
+          console.log('getting frontend');
+          return browser.get(frontend);
+        });
+
+        it('Search hockey', async function() {
+          console.log('Search hockey');
           return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
+
         it('Should get hockey', async function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
