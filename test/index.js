@@ -31,7 +31,7 @@ describe('Promise tests', function () {
       setTimeout(() => resolve('done'), 1000);
     });
     return promise.then(function() {
-      promise_fail = new Promise(function (resolve, reject) {
+      let promise_fail = new Promise(function (resolve, reject) {
         setTimeout(() => reject('fail on purpose'), 1000);
       });
     });
@@ -115,10 +115,14 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(frontend);
         });
 
+        it('Searchbox placeholder text', async function(done) {
+          return browser.findElement(webdriver.By.name('q[]')).get_attribute('placeholder').then(function(text) {
+            assert(text, 'Search Keywords(s)');
+          });
+        });
+
         it('Search hockey', async function() {
-          search_box = browser.findElement(webdriver.By.name('q[]'));
-          assert(search_box.get_attribute('placeholder'), 'Search Keywords(s)');
-          return search_box.sendKeys('hockey');
+          return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
 
         it('Should get hockey', async function() {
