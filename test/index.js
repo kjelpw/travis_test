@@ -25,6 +25,17 @@ describe('Promise tests', function () {
     });
     return promise;
   });
+
+  it('Promise should fail', function () {
+    let promise = new Promise(function(resolve, reject) {
+      setTimeout(() => resolve('done'), 1000);
+    });
+    return promise.then(function() {
+      promise_fail = new Promise(function (resolve, reject) {
+        setTimeout(() => reject('fail on purpose'), 1000);
+      });
+    });
+  });
 });
 
 // Integration tests
@@ -105,39 +116,40 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Search hockey', async function() {
-          return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
+          search_box = browser.findElement(webdriver.By.name('q[]'));
+          assert(search_box.get_attribute('placeholder'), 'Search Keywords(s)');
+          return search_box.sendKeys('hockey');
         });
 
         it('Should get hockey', async function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
-            console.log(title);
             assert(title, 'Digital Collections @ DU');
           });
         });
       });
 
       //further tests
-      // describe('Accordion test', function() {
-      //   it('Find button test', function(done) {
-      //       browser.findElement(webdriver.By.tagName('button')).click().then(function() {
-      //         // TODO: add assertions for promises
-      //         console.log('click accordion');
-      //         browser.findElement(webdriver.By.className('accordion')).click().then(function() {
-      //
-      //             // TODO: add assertions
-      //             console.log('find facet');
-      //             let facet = browser.findElement(webdriver.By.className('facet-name'));
-      //             facet.findElement(webdriver.By.tagName('a')).click().then(function(){
-      //               done();
-      //             });
-      //
-      //             // TODO: add assertions
-      //             // assert.equal('', '');
-      //
-      //         });
-      //       });
-      //     });
-      // });
+      describe('Accordion test', function() {
+        it('Click search button test', function(done) {
+            return browser.findElement(webdriver.By.tagName('button')).click().then(function() {
+              // TODO: add assertions for promises
+              console.log('click accordion');
+              browser.findElement(webdriver.By.className('accordion')).click().then(function() {
+
+                  // TODO: add assertions
+                  console.log('find facet');
+                  let facet = browser.findElement(webdriver.By.className('facet-name'));
+                  facet.findElement(webdriver.By.tagName('a')).click().then(function(){
+                    done();
+                  });
+
+                  // TODO: add assertions
+                  // assert.equal('', '');
+
+              });
+            });
+          });
+      });
     });
 });
