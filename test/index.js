@@ -112,10 +112,12 @@ describe('Special Collections (Selenium) Tests', function() {
     describe('UI Tests', function () {
       describe('Search object tests', function() {
         before(function() {
+          console.log('get Frontend');
           return browser.get(frontend);
         });
 
-        it('Searchbox placeholder text', async function(done) {
+        it('Searchbox placeholder text', async function() {
+          console.log('get searchbox Attribute');
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
             assert(text, 'Search Keywords(s)');
           });
