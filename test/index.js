@@ -128,7 +128,19 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Type Facet', function() {
+          return browser.findElement(webdriver.By.id('type-facet')).getAttribute('innerHTML').then(function(text) {
+            assert(text, 'Collections');
+          });
+        });
+
+        it('Type Facet click', function() {
           return browser.findElement(webdriver.By.id('type-facet')).click();
+        });
+
+        it('Collections Accordion click', function() {
+          return browser.findElement(webdriver.By.alt('Collections')).getAttribute('innerHTML').then(function(text) {
+            assert(text, 'Collections');
+          });
         });
 
         it('Collections Accordion', function() {
