@@ -110,11 +110,11 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
-        it('Search hockey', async function() {
+        it('Search hockey', function() {
           return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
 
-        it('Should get hockey', async function() {
+        it('Should get hockey', function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
             assert(title, 'Digital Collections @ DU');
@@ -127,12 +127,12 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(frontend);
         });
 
-        it('Type Facet', async function() {
+        it('Type Facet', function() {
           return browser.findElement(webdriver.By.id('type-facet')).click();
         });
 
-        it('Collections Accordion', async function() {
-          return browser.findElement(webdriverBy)
+        it('Collections Accordion', function() {
+          return browser.findElement(webdriver.By)
         });
       });
 
