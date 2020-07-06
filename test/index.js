@@ -3,6 +3,7 @@
 const request = require('supertest');
 const webdriver = require('selenium-webdriver');
 const assert = require('assert');
+var expect = require('chai').expect;
 var chrome = require('selenium-webdriver/chrome');
 var path = require('chromedriver').path;
 const frontend = 'https://specialcollections.du.edu/';  // change to local environment or travis environment url
@@ -140,7 +141,9 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion click', function() {
-          return browser.findElement(webdriver.By.class('accordion')).getAttribute('innerHTML').then(function(text) {
+          return browser.findElement(webdriver.By.class('accordion'))
+          .filter(element => element.getAttribute('alt').equals('Collections'))
+          .getAttribute('innerHTML').then(function(text) {
             assert(text, 'Collections');
           });
         });
