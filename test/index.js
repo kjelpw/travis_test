@@ -124,21 +124,26 @@ describe('Special Collections (Selenium) Tests', function() {
         });
       });
 
+      //for the accorions/facets on the main page
       describe('facet tests', function() {
+        //navigate to the frontapge
         before(function() {
           return browser.get(frontend);
         });
 
+        //check the type facet title
         it('Type Facet title', function() {
           return browser.findElement(webdriver.By.id('type-facet')).getAttribute('innerHTML').then(function(text) {
             expect(text).to.include('<h4>Type</h4>');
           });
         });
 
+        //click the type facet
         it('Type Facet click', function() {
           return browser.findElement(webdriver.By.id('type-facet')).click();
         });
 
+        //check the collection facet title
         it('Collections Accordion title', function() {
           return browser.findElement(webdriver.By.tagName('accordion'))
           .filter(element => element.getAttribute('alt').equals('Collections'))
@@ -147,10 +152,12 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        //click the collection accordion
         it('Collections Accordion click', function() {
           return browser.findElement(webdriver.By.tagName('Collections')).click();
         });
 
+        //check the creator accordion title
         it('Creator Accordion title', function() {
           return browser.findElement(webdriver.By.tagName('accordion'))
           .filter(element => element.getAttribute('alt').equals('Creator'))
@@ -159,8 +166,10 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
-        it('Collections Accordion click', function() {
-          return browser.findElement(webdriver.By.tagName('Collections')).click();
+        //click the creator accordion
+        it('Creator Accordion click', function() {
+          return browser.findElement(webdriver.By.tagName('accordion'))
+          .filter(element => element.getAttribute('alt').equals('Creator')).click();
         });
       });
 
