@@ -101,14 +101,11 @@ describe('Special Collections (Selenium) Tests', function() {
     describe('UI Tests', function () {
       describe('Search object tests', function() {
         before(function() {
-          console.log('get Frontend');
           return browser.get(frontend);
         });
 
         it('Searchbox placeholder text', async function() {
-          console.log('get searchbox Attribute');
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
-            console.log(text);
             assert(text, 'Search Keywords(s)');
           });
         });
@@ -122,6 +119,16 @@ describe('Special Collections (Selenium) Tests', function() {
             //test if the search for hockey worked
             assert(title, 'Digital Collections @ DU');
           });
+        });
+      });
+
+      describe('facet tests', function() {
+        before(function() {
+          return browser.get(frontend);
+        });
+
+        it('Type Facet', async function() {
+          return browser.findElement(webdriver.By.id('type-facet'));
         });
       });
 
