@@ -124,11 +124,15 @@ describe('Special Collections (Selenium) Tests', function() {
 
       describe('facet tests', function() {
         before(function() {
-          return browser.get(frontend).click();
+          return browser.get(frontend);
         });
 
         it('Type Facet', async function() {
-          return browser.findElement(webdriver.By.id('type-facet'));
+          return browser.findElement(webdriver.By.id('type-facet')).click();
+        });
+
+        it('Collections Accordion', async function() {
+          return browser.findElement(webdriverBy)
         });
       });
 
