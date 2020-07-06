@@ -107,7 +107,8 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Searchbox placeholder text', function() {
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
             //assert(text, 'Search Keywords(s)');
-            assert(text, 'this should fail');
+            expect(text).to.equal('Search Keywords(s)');
+            expect(text).to.equal('this should fail');
           });
         });
 
@@ -139,7 +140,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion click', function() {
-          return browser.findElement(webdriver.By.alt('Collections')).getAttribute('innerHTML').then(function(text) {
+          return browser.findElement(webdriver.By.class('accordion')).getAttribute('innerHTML').then(function(text) {
             assert(text, 'Collections');
           });
         });
