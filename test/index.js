@@ -108,8 +108,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Searchbox placeholder text', function() {
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
             //assert(text, 'Search Keywords(s)');
-            expect(text).to.equal('Search Keywords(s)');
-            expect(text).to.equal('this should fail');
+            expect(text).to.equal('Search Keyword(s)');
           });
         });
 
@@ -130,9 +129,9 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(frontend);
         });
 
-        it('Type Facet', function() {
+        it('Type Facet title', function() {
           return browser.findElement(webdriver.By.id('type-facet')).getAttribute('innerHTML').then(function(text) {
-            expect(text).to.equal('Collections');
+            expect(text).to.include('<h4>Type</h4>');
           });
         });
 
@@ -140,11 +139,23 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.id('type-facet')).click();
         });
 
-        it('Collections Accordion', function() {
+        it('Collections Accordion title', function() {
           return browser.findElement(webdriver.By.tagName('accordion'))
           .filter(element => element.getAttribute('alt').equals('Collections'))
           .getAttribute('innerHTML').then(function(text) {
-            expect(text).to.equal('Collections');
+            expect(text).to.include('<h4>Collections</h4>');
+          });
+        });
+
+        it('Collections Accordion click', function() {
+          return browser.findElement(webdriver.By.tagName('Collections')).click();
+        });
+
+        it('Creator Accordion title', function() {
+          return browser.findElement(webdriver.By.tagName('accordion'))
+          .filter(element => element.getAttribute('alt').equals('Creator'))
+          .getAttribute('innerHTML').then(function(text) {
+            expect(text).to.include('Creator');
           });
         });
 
