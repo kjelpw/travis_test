@@ -149,9 +149,10 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Collections Accordion title', function() {
           return browser.findElements(webdriver.By.tagName('accordion'))
           .then(function(elements) {
-            elements.find(element => element.getAttribute('alt') == 'Collections')
-            .getAttribute('innerHTML').then(function(text) {
-              expect(text).to.include('<h4>Collections</h4>');
+            elements.find(element => element.getAttribute('alt') == 'Collections').then(function(element) {
+              element.getAttribute('innerHTML').then(function(text) {
+                expect(text).to.include('<h4>Collections</h4>');
+              });
             });
           });
         });
