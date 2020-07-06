@@ -120,7 +120,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Should get hockey', function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
-            assert(title, 'Digital Collections @ DU');
+            expect(title).to.equal('Digital Collections @ DU');
           });
         });
       });
@@ -132,7 +132,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
         it('Type Facet', function() {
           return browser.findElement(webdriver.By.id('type-facet')).getAttribute('innerHTML').then(function(text) {
-            assert(text, 'Collections');
+            expect(text).to.equal('Collections');
           });
         });
 
@@ -140,16 +140,16 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.id('type-facet')).click();
         });
 
-        it('Collections Accordion click', function() {
-          return browser.findElement(webdriver.By.class('accordion'))
+        it('Collections Accordion', function() {
+          return browser.findElement(webdriver.By.tagName('accordion'))
           .filter(element => element.getAttribute('alt').equals('Collections'))
           .getAttribute('innerHTML').then(function(text) {
-            assert(text, 'Collections');
+            expect(text).to.equal('Collections');
           });
         });
 
-        it('Collections Accordion', function() {
-          return browser.findElement(webdriver.By.alt('Collections')).click();
+        it('Collections Accordion click', function() {
+          return browser.findElement(webdriver.By.tagName('Collections')).click();
         });
       });
 
