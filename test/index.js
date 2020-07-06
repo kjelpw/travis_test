@@ -106,7 +106,8 @@ describe('Special Collections (Selenium) Tests', function() {
 
         it('Searchbox placeholder text', function() {
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
-            assert(text, 'Search Keywords(s)');
+            //assert(text, 'Search Keywords(s)');
+            assert(text, 'this should fail');
           });
         });
 
