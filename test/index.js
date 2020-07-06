@@ -104,7 +104,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(frontend);
         });
 
-        it('Searchbox placeholder text', async function() {
+        it('Searchbox placeholder text', function() {
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
             assert(text, 'Search Keywords(s)');
           });
@@ -124,7 +124,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
       describe('facet tests', function() {
         before(function() {
-          return browser.get(frontend);
+          return browser.get(frontend).click();
         });
 
         it('Type Facet', async function() {
