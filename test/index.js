@@ -132,7 +132,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion', function() {
-          return browser.findElement(webdriver.By)
+          return browser.findElement(webdriver.By.alt('Collections')).click();
         });
       });
 
