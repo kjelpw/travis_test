@@ -116,7 +116,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Searchbox placeholder text', async function(done) {
-          return browser.findElement(webdriver.By.name('q[]')).get_attribute('placeholder').then(function(text) {
+          return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
             assert(text, 'Search Keywords(s)');
           });
         });
@@ -134,26 +134,26 @@ describe('Special Collections (Selenium) Tests', function() {
       });
 
       //further tests
-      describe('Accordion test', function() {
-        it('Click search button test', function(done) {
-            return browser.findElement(webdriver.By.tagName('button')).click().then(function() {
-              // TODO: add assertions for promises
-              console.log('click accordion');
-              browser.findElement(webdriver.By.className('accordion')).click().then(function() {
-
-                  // TODO: add assertions
-                  console.log('find facet');
-                  let facet = browser.findElement(webdriver.By.className('facet-name'));
-                  facet.findElement(webdriver.By.tagName('a')).click().then(function(){
-                    done();
-                  });
-
-                  // TODO: add assertions
-                  // assert.equal('', '');
-
-              });
-            });
-          });
-      });
+      // describe('Accordion test', function() {
+      //   it('Click search button test', function(done) {
+      //       return browser.findElement(webdriver.By.tagName('button')).click().then(function() {
+      //         // TODO: add assertions for promises
+      //         console.log('click accordion');
+      //         browser.findElement(webdriver.By.className('accordion')).click().then(function() {
+      //
+      //             // TODO: add assertions
+      //             console.log('find facet');
+      //             let facet = browser.findElement(webdriver.By.className('facet-name'));
+      //             facet.findElement(webdriver.By.tagName('a')).click().then(function(){
+      //               done();
+      //             });
+      //
+      //             // TODO: add assertions
+      //             // assert.equal('', '');
+      //
+      //         });
+      //       });
+      //     });
+      // });
     });
 });
