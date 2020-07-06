@@ -148,9 +148,11 @@ describe('Special Collections (Selenium) Tests', function() {
         //check the collection facet title
         it('Collections Accordion title', function() {
           return browser.findElements(webdriver.By.tagName('accordion'))
-          .filter(element => element.getAttribute('alt').equals('Collections'))
-          .getAttribute('innerHTML').then(function(text) {
-            expect(text).to.include('<h4>Collections</h4>');
+          .then(function(elements) {
+            elements.find(element => element.getAttribute('alt').equals('Collections'))
+            .getAttribute('innerHTML').then(function(text) {
+              expect(text).to.include('<h4>Collections</h4>');
+            });
           });
         });
 
