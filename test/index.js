@@ -25,17 +25,6 @@ describe('Promise tests', function () {
     });
     return promise;
   });
-
-  it('Promise should fail', function () {
-    let promise = new Promise(function(resolve, reject) {
-      setTimeout(() => resolve('done'), 1000);
-    });
-    return promise.then(function() {
-      let promise_fail = new Promise(function (resolve, reject) {
-        setTimeout(() => reject('fail on purpose'), 1000);
-      });
-    });
-  });
 });
 
 // Integration tests
@@ -119,6 +108,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Searchbox placeholder text', async function() {
           console.log('get searchbox Attribute');
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
+            console.log(text);
             assert(text, 'Search Keywords(s)');
           });
         });
