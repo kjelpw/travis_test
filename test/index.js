@@ -15,7 +15,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 describe('Tests if tests are working', function(){
     it('1==1', function(){
-      assert.equal(1, 1);
+      assert.equal(0, 1);
     });
 });
 
@@ -125,7 +125,7 @@ describe('Special Collections (Selenium) Tests', function() {
       });
 
       //for the accorions/facets on the main page
-      describe('facet tests', function() {
+      describe('Facet tests', function() {
         //navigate to the frontapge
         before(function() {
           return browser.get(frontend);
