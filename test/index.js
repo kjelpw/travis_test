@@ -150,7 +150,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElements(webdriver.By.tagName('accordion'))
           .then(function(elements) {
             //get the attributes of the accordion elements
-            for (i = 0; i < elements.length; i++) {
+            for (var i = 0; i < elements.length; i++) {
               if(elements[i].getAttribute('alt').equals('Collections')){
                 elements[i].getAttribute('innerHTML').then(function(text) {
                   expect(text).to.include('<h4>Collections</h4>');
