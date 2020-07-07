@@ -155,7 +155,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion hidden', function(done) {
-          assert(browser.isDisplayed(), false);
+          assert(browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]')).isDisplayed(), false);
           done();
         });
 
