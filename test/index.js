@@ -147,20 +147,16 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //check the collection facet title
         it('Collections Accordion title', function() {
-
-
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
           .getAttribute('innerHTML')
           .then(function(text) {
-            console.log(text);
             expect(text).to.include('<h4>Collections</h4>');
           });
         });
 
         //click the collection accordion
         it('Collections Accordion click', function() {
-          return browser.findElements(webdriver.By.tagName('accordion'))
-          .filter(element => element.getAttribute('alt').equals('Collections'))
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
           .click();
         });
 
