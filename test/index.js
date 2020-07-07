@@ -155,7 +155,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion hidden', function(done) {
-          assert(broswer.isDisplayed(), false);
+          assert(browser.isDisplayed(), false);
           done();
         });
 
@@ -176,7 +176,6 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //click the creator accordion
         it('Creator Accordion click', function() {
-          //*[@id="collections-window"]
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
           .click();
         });
