@@ -162,17 +162,16 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //check the creator accordion title
         it('Creator Accordion title', function() {
-          return browser.findElements(webdriver.By.tagName('accordion'))
-          .filter(element => element.getAttribute('alt').equals('Creator'))
-          .getAttribute('innerHTML').then(function(text) {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
             expect(text).to.include('Creator');
           });
         });
 
         //click the creator accordion
         it('Creator Accordion click', function() {
-          return browser.findElements(webdriver.By.tagName('accordion'))
-          .filter(element => element.getAttribute('alt').equals('Creator'))
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
           .click();
         });
       });
