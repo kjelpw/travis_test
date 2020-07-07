@@ -155,8 +155,10 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion hidden', function(done) {
-          assert.equal(browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]')).isDisplayed(), false);
-          done();
+          return browser.findElement(webdriver.By.xpath('//*[@id="collections-window"]')).isDisplayed()
+          .then(function(visible){
+            expect(visible).to.equal(false);
+          });
         });
 
         //click the collection accordion
