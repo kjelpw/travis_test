@@ -15,7 +15,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 describe('Tests if tests are working', function(){
     it('1==1', function(){
-      assert.equal(0, 1);
+      assert.equal(1, 1);
     });
 });
 
@@ -154,6 +154,11 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Collections Accordion hidden', function(done) {
+          assert(broswer.isDisplayed(), false);
+          done();
+        });
+
         //click the collection accordion
         it('Collections Accordion click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
@@ -171,6 +176,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //click the creator accordion
         it('Creator Accordion click', function() {
+          //*[@id="collections-window"]
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
           .click();
         });
