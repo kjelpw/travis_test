@@ -215,7 +215,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion hidden', function(done) {
-          return browser.findElement(webdriver.By.xpath('//*[@id="collections-window"]'))
+          return browser.findElement(webdriver.By.id('collections-window'));
           // .isDisplayed()
           // .then(function(visible) {
           //   expect(visible).to.equal(false);
