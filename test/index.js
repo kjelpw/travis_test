@@ -182,6 +182,14 @@ describe('Special Collections (Selenium) Tests', function() {
           .click();
         });
 
+        it('Type Facet hidden', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(false);
+          });
+        });
+
 
 
 
