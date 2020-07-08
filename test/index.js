@@ -177,7 +177,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         //click the type facet
-        it('Type Facet click', function() {
+        it('Type Facet 1st click', function() {
           return browser.findElement(webdriver.By.id('type-facet'))
           .click();
         });
@@ -197,6 +197,28 @@ describe('Special Collections (Selenium) Tests', function() {
             expect(text).to.include('fas facet-caret fa-caret-right');
           });
         });
+
+        //click the type facet
+        it('Type Facet 2nd click', function() {
+          return browser.findElement(webdriver.By.id('type-facet'))
+          .click();
+        });
+
+        it('Type Facet not hidden after 2nd click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(true);
+          });
+        });
+
+        it('Type Facet caret after 2nd click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fas fa-caret-down facet-caret');
+          });
+        });
+        //TODO add tests to see if the window is populated
 
 
 
