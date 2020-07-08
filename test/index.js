@@ -6,7 +6,7 @@ const assert = require('assert');
 var expect = require('chai').expect;
 var chrome = require('selenium-webdriver/chrome');
 var path = require('chromedriver').path;
-const frontend = 'https://specialcollections.du.edu/';  // change to local environment or travis environment url
+const frontend = 'http://localhost:9007';  // change to local environment or travis environment url
 
 // handles ssl cert if it's available on test domains.
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -172,7 +172,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Type Facet caret before click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
           .getAttribute('class').then(function(text) {
-            expect(text).to.include('fas fa-caret-down facet-caret');
+            expect(text).to.include('fa-caret-down');
           });
         });
 
@@ -194,7 +194,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Type Facet caret after click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
           .getAttribute('class').then(function(text) {
-            expect(text).to.include('fas facet-caret fa-caret-right');
+            expect(text).to.include('a-caret-right');
           });
         });
 
@@ -215,7 +215,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Type Facet caret after 2nd click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
           .getAttribute('class').then(function(text) {
-            expect(text).to.include('fas fa-caret-down facet-caret');
+            expect(text).to.include('fa-caret-down');
           });
         });
         //TODO add tests to see if the window is populated
