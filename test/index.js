@@ -217,8 +217,8 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('//*[@id="collections-window"]'))
           .isDisplayed()
           .then(function(visible) {
-            console.log('HERE');
             expect(visible).to.equal(false);
+            console.log('HERE');
           });
         });
 
