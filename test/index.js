@@ -219,7 +219,6 @@ describe('Special Collections (Selenium) Tests', function() {
           .isDisplayed()
           .then(function(visible) {
             expect(visible).to.equal(false);
-            console.log('HERE');
           });
         });
 
