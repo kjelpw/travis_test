@@ -100,6 +100,21 @@ describe('Special Collections (Selenium) Tests', function() {
     });
 
     describe('UI Tests', function () {
+      before(function() {
+        return browser.get(frontend);
+      });
+
+      it('Tab title test', function() {
+        return browser.getTitle().then(function(title) {
+          expect(title).to.equal('Digital Collections @ DU');
+        });
+      });
+
+
+
+
+
+      //for searching for objects using the search box
       describe('Search object tests', function() {
         before(function() {
           return browser.get(frontend);
@@ -116,6 +131,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.name('q[]')).sendKeys('hockey');
         });
 
+        //TODO
         it('Should get hockey', function() {
           return browser.getTitle().then(function(title) {
             //test if the search for hockey worked
@@ -123,6 +139,12 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
       });
+
+
+
+
+
+
 
       //for the accorions/facets on the main page
       describe('Facet tests', function() {
@@ -139,11 +161,33 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Type Facet not hidden', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(true);
+          });
+        });
+
+        it('Type Facet caret before click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fas fa-caret-down facet-caret');
+          });
+        });
+
         //click the type facet
         it('Type Facet click', function() {
           return browser.findElement(webdriver.By.id('type-facet'))
           .click();
         });
+
+
+
+
+
+
+
 
         //check the collection facet title
         it('Collections Accordion title', function() {
@@ -155,9 +199,9 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('Collections Accordion hidden', function(done) {
-          return browser.findElement(webdriver.By.xpath('//*[@id="collections-window"]')).isDisplayed()
-          .then(function(visible){
-            console.log('Visible: ' + visible);
+          return browser.findElement(webdriver.By.xpath('//*[@id="collections-window"]'))
+          .isDisplayed()
+          .then(function(visible) {
             expect(visible).to.equal(false);
           });
         });
@@ -167,6 +211,12 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
           .click();
         });
+
+
+
+
+
+
 
         //check the creator accordion title
         it('Creator Accordion title', function() {
