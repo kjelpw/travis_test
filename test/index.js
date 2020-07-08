@@ -190,6 +190,13 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Type Facet caret after click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fas facet-caret fa-caret-right');
+          });
+        });
+
 
 
 
