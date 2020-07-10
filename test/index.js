@@ -13,13 +13,13 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 // start tests "mocha index.js"
 
-describe('Tests if tests are working', function(){
+describe('Tests if assertion tests are working', function(){
     it('1==1', function(){
       assert.equal(1, 1);
     });
 });
 
-describe('Promise tests', function () {
+describe('Tests if promise tests are working', function () {
   it('Promise should pass', function () {
     let promise = new Promise(function(resolve, reject) {
       setTimeout(() => resolve('done'), 1000);
@@ -182,7 +182,7 @@ describe('Special Collections (Selenium) Tests', function() {
           .click();
         });
 
-        //currently (correctly )fails due to bug
+        //currently (correctly )fails due to bug, different caret?
         it('Type Facet hidden', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
           .isDisplayed()
@@ -249,6 +249,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
           .click();
         });
+        //TODO add tests to see if the window is populated
 
 
 
@@ -270,6 +271,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
           .click();
         });
+        //TODO add tests to see if the window is populated
       });
 
       //further tests
