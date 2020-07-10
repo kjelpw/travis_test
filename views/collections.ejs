@@ -12,6 +12,8 @@
 		<div id="home-collections">
 			<a id="collections"></a>
 			<h3>Collections</h3>
+			<br/>
+			<div class="content-message">Notice: Our digital collections contain materials that are racist, sexist, and may be painful or traumatizing to researchers.</div>
 			<hr>
 
 			<% if(error) { %>
@@ -22,7 +24,7 @@
 					<% for (var i = 0; i < collections.length; i++) { %>
 						<div class="col-sm-3 collection-thumb">
 							<dl class="item">
-								<a href="<%= root_url %>/collection/<%= collections[i].pid %>">
+								<a href="<%= root_url %>/object/<%= collections[i].pid %>">
 									<dt>
 										<div class="item-thumb">
 											<img src="<%= root_url %>/datastream/<%= collections[i].pid %>/TN" alt="<%= collections[i].title %>">

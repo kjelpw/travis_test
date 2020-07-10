@@ -56,7 +56,7 @@ var config = require('../config/' + process.env.CONFIGURATION_FILE),
     if(!object.object_type) {
       console.log("Error: Object " + object + " has no object_type value");
     }
-    path = "/" + object.object_type || "";
+    path = "/object";
 
     objectList.push({
         pid: pid,
@@ -353,6 +353,43 @@ exports.getCitations = function(object)  {
   }
 
   return citations;
+}
+
+/*
+ * Slice the array elements to current page and page size
+ */
+exports.getArrayPage = function(array, pageNum, pageSize) {
+  let from = (pageNum-1) * pageSize;
+  let to = from + pageSize;
+  return array.slice(from, to);
+}
+
+/**
+ * Convert the sort params array into a data array for the search function
+ * Sorting by "relevance" will return null, no sorting is required
+ *
+ * @param {String} sort - The sort string: two terms delimited by "," (ex "sort field,sort type" or "Title,asc")
+ *
+ * @typedef {Object} sortData
+ * @property {String} field - First value of comma delimited "sort" string
+ * @property {String} order - Second value of comma delimited "sort" string
+ *
+ * @return {sortData|null} - The sort data object.  Null will be returned if the sort value is "relevance"
+ */
+exports.getSortDataArray = function(sort) {
+  let sortData = null;
+  if(sort && sort != "") {
+    sort = sort.split(",");
+
+    // If the sort field value is "relevance", do not assign the sort data, this is the default search
+    if(sort[0].toLowerCase() != "relevance") {
+      sortData = {
+        field: sort[0],
+        order: sort[1] || null
+      }
+    }
+  }
+  return sortData;
 }
 
 

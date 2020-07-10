@@ -1,20 +1,24 @@
 $( document ).ready(function() {
 	$('#results-per-page').change(function(event) {
-		var searchUrl = decodeURIComponent(window.location.href).replace(/&resultsPerPage=[0-9]+/g, "");
+		var searchUrl = decodeURIComponent(window.location.href).replace(/[&?]resultsPerPage=[0-9]+/g, "");
 		searchUrl = searchUrl.replace(/&*page=[0-9]+/g, "");
-		searchUrl += "&resultsPerPage=" + $('#results-per-page').val();
+		var prefix = searchUrl.indexOf("?") > 0 ? "&" : "?";
+		searchUrl += prefix;
+		searchUrl += "resultsPerPage=" + $('#results-per-page').val();
 		window.location.replace(encodeURI(searchUrl));
 	});
 
 	$('#results-view-select').change(function(event) {
-		var searchUrl = decodeURIComponent(window.location.href).replace(/&view=[a-zA-Z0-9]+/g, "");
+		var searchUrl = decodeURIComponent(window.location.href).replace(/[&?]view=[a-zA-Z0-9]+/g, "");
 		searchUrl += "&view=" + $('#results-view-select').val();
 		window.location.replace(encodeURI(searchUrl));
 	});
 
 	$('#sort-by-select').change(function(event) {
-		var searchUrl = decodeURIComponent(window.location.href).replace(/&sort=[a-zA-Z0-9, ]+/g, "");
-		searchUrl += "&sort=" + $('#sort-by-select').val();
+		var searchUrl = decodeURIComponent(window.location.href).replace(/[&?]sort=[a-zA-Z0-9, ]+/g, "");
+		var prefix = searchUrl.indexOf("?") > 0 ? "&" : "?";
+		searchUrl += prefix;
+		searchUrl += "sort=" + $('#sort-by-select').val();
 		window.location.replace(encodeURI(searchUrl));
 	});
 
@@ -46,12 +50,13 @@ $( document ).ready(function() {
 	});
 
   	$("#file-download").click(function(event) {
-  		if($(".download-links").hasClass("panel-collapsed")) {
-  			$(".download-links").removeClass("panel-collapsed");
-  		}
-  		else {
-  			$(".download-links").addClass("panel-collapsed");
-  		}
+  		/* Disabled until update for multiple download options 6/25/20 */
+  		// if($(".download-links").hasClass("panel-collapsed")) {
+  		// 	$(".download-links").removeClass("panel-collapsed");
+  		// }
+  		// else {
+  		// 	$(".download-links").addClass("panel-collapsed");
+  		// }
 	});
 
 	$("#home-search button").click(function(event) {
@@ -71,6 +76,20 @@ $( document ).ready(function() {
 		$(".sidebar-search input[type='text']").val(DOMPurify.sanitize($(".sidebar-search input[type='text']").val()));
 		$(".sidebar-search form").submit();
 	});
+
+	// TODO convert above functions to pure JS from JQuery
+	var accordions = document.getElementsByClassName("collapsible");
+	for (var i = 0; i < accordions.length; i++) {
+	    accordions[i].addEventListener("click", function() {
+	        this.classList.toggle("active");
+	        var content = document.getElementsByClassName("mods-display")[0];
+	        if (content.style.display === "block") {
+	            content.style.display = "none";
+	        } else {
+	            content.style.display = "block";
+	        }
+	    });
+	}
 });
 
 

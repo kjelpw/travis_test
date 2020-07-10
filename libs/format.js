@@ -37,6 +37,7 @@ exports.formatFacetDisplay = function(object, callback) {
   formatFacets(object || []); // format all facets
   formatTypeFacets(object["Type"] || []);
   formatDateFacets(object["Date"] || []);
+  formatObjectTypeFacets(object["Object Type"] || []);
   formatCollectionFacets(object["Collection"] || [], function(error) {
     if(error) {
       callback(error, null);
@@ -149,5 +150,15 @@ var formatCollectionBreadcrumbs = function(breadcrumbFacets, callback) {
 
       callback(null);
     });
+  }
+}
+
+// Capitalize the first char, change 'object' name to 'item'
+var formatObjectTypeFacets = function(facets) {
+  for(var key in facets) {
+    if(facets[key].name == "object") {
+      facets[key].name = "Item";
+    }
+    facets[key].name = facets[key].name[0].charAt(0).toUpperCase() + facets[key].name.slice(1);
   }
 }

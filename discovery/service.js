@@ -84,7 +84,7 @@ exports.getTopLevelCollections = function(pageNum=0, callback) {
         }
 
         //Query the index for root collection members
-        getObjectsInCollection(config.topLevelCollectionPID, pageNum, null, function(error, collections) {
+        getObjectsInCollection(config.topLevelCollectionPID, pageNum, null, {"field": "Title", "order": "asc"}, 12, function(error, collections) {
           if(error) {
             callback(error, null);
 
@@ -118,7 +118,7 @@ exports.getTopLevelCollections = function(pageNum=0, callback) {
  * @param {String|null} Error message or null
  * @param {collection|null} Null if error 
  */
-var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, callback) {
+var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, sort=null, pageSize=10, callback) {
   Repository.getCollectionObjects(collectionID, facets).catch(error => {
     callback(error, null);
   })
@@ -142,6 +142,8 @@ var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, call
         callback(null, collection);
       }
       else {
+
+        // TODO: Replace code below with call to /search
 
         // If facet data is present, add it to the search
         var facetFilters = [];
@@ -172,21 +174,47 @@ var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, call
           }
         }
 
-        // Sort collections by title a-z
-        let sortArr = [],
-            sortField = {};
-        sortField[config.collectionSortFields["Title"].path] = {
-          "order": "asc"
-        }
-        sortArr.push(sortField);
+        let sortArr = [];
+        if(sort) {
+          let data = {},
+              field = config.searchSortFields[sort.field] || null;
 
-        // Use local index to find the collection children
+          if(field) {
+            if(field.matchField && field.matchField.length > 0) {
+              let filterObj = {
+                "term": {}
+              };
+
+              if(field.matchTerm && field.matchTerm.length > 0) {
+                filterObj.term[field.matchField + ".keyword"] = field.matchTerm;
+                data[field.path + ".keyword"] = {
+                  "order": sort.order,
+                  "nested_path": field.path.substring(0,field.path.lastIndexOf(".")),
+                  "nested_filter": filterObj
+                }
+              }
+            }
+            else {
+              data[field.path + ".keyword"] = {
+                "order": sort.order
+              }
+            }
+          }
+          sortArr.push(data);
+        }
+
+        let from = 0, size = 10000;
+        if(pageNum) {
+          from = (pageNum - 1) * pageSize;
+          size = pageSize || config.defaultCollectionsPerPage;
+        }
+
         var data = {  
           index: config.elasticsearchPublicIndex,
           type: config.searchIndexType,
           body: {
-            from : (pageNum - 1) * config.maxCollectionsPerPage,
-            size : config.maxCollectionsPerPage,
+            from : from,
+            size : size,
             query: {
                 "bool": {
                   "must": {
@@ -207,6 +235,8 @@ var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, call
           }
         }
 
+        if(config.nodeEnv == "devlog") {console.log("DEV query object:", util.inspect(data, {showHidden: false, depth: null}));}
+
         // Get child objects of this collection
         es.search(data, function (error, response, status) {
           var responseData = {};
@@ -222,7 +252,7 @@ var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, call
               results.push(index._source);
             }
 
-            collection.list = Helper.getObjectLinkDisplayList(results); // Get the view data list from the elastic results array
+            collection.list = Helper.getObjectLinkDisplayList(results);
             collection.facets = response.aggregations;
             collection.count = response.hits.total;
 
@@ -239,7 +269,8 @@ var getObjectsInCollection = function(collectionID, pageNum=1, facets=null, call
                   callback("Invalid collection: " + object.pid, []);
                 }
                 else {
-                  collection.title = object.title;
+                  collection.title = object.title || "No Title";
+                  collection.abstract = (object.abstract && typeof object.abstract == "object") ? object.abstract[0] : object.abstract || "";
                   callback(null, collection);
                 }
               });
@@ -454,7 +485,7 @@ exports.getTitleString = getTitleString;
 var getParentTrace = function(pid, collections, callback) {
   fetchObjectByPid(config.elasticsearchPublicIndex, pid, function(error, response) {
       var title = "",
-          url = config.rootUrl + "/collection/" + pid;
+          url = config.rootUrl + "/object/" + pid;
 
       if(error) {
         callback(error, null);
@@ -512,7 +543,8 @@ exports.getManifestObject = function(pid, index, page, apikey, callback) {
           "Title": object.title,
           "Creator": object.creator,
           "Description": object.abstract
-        }
+        },
+        protocol: /https/.test(config.IIIFUrl) ? "https" : "http"
       };
 
       // Compound objects
@@ -534,7 +566,6 @@ exports.getManifestObject = function(pid, index, page, apikey, callback) {
 
         for(var key in parts) {
           resourceUrl = config.rootUrl + "/datastream/" + object.pid + "/" + Helper.getDsType(parts[key].type) + "/" + parts[key].order;
-
           children.push({
             label: parts[key].title,
             sequence: parts[key].order || key,
@@ -561,7 +592,6 @@ exports.getManifestObject = function(pid, index, page, apikey, callback) {
       // Single objects
       else {
         resourceUrl = config.rootUrl + "/datastream/" + object.pid + "/" + Helper.getDsType(object.mime_type);
-
         children.push({
           label: object.title,
           sequence: "1",

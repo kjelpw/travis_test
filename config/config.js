@@ -89,7 +89,8 @@ module.exports = {
     /*
      * Collection results per page
      */
-    maxCollectionsPerPage: 12,
+    defaultHomePageCollectionsCount: 12,
+    defaultCollectionsPerPage: 10,
 
     /*
      * Max number of page links shown in the page list
@@ -177,14 +178,14 @@ module.exports = {
     /*
      * Show the object download options
      */
-    enableFileDownload: false,
+    enableFileDownload: true,
 
     /*
      * IIIF API 
      */
     IIIFUrl: process.env.IIIF_URL,
     IIIFAPiKeyPrefix: "__",
-    IIIFManifestPageSize: -1,
+    IIIFManifestPageSize: 20,
 
     /*
      * IIIF Object Types
@@ -199,7 +200,7 @@ module.exports = {
         "pdf": "foaf:Document"
     },
 
-    IIIFThumbnailWidth: "150",
+    IIIFThumbnailWidth: "67",
     IIIFThumbnailHeight: "",
 
 
@@ -445,12 +446,24 @@ module.exports = {
             "matchTerm": "local"
         }
     },
+    defaultSearchSortField: "relevance",
 
     collectionSortFields: {
         "Title": {
-            "path": "title.keyword"
+            "path": "title"
+        },
+        "Call Number": {
+            "path": "display_record.identifiers.identifier",
+            "matchField": "display_record.identifiers.type",
+            "matchTerm": "local"
+        },
+        "Creation Date": {
+            "path": "display_record.dates.begin",
+            "matchField": "display_record.dates.label",
+            "matchTerm": "creation"
         }
     },
+    defaultCollectionSortField: "Call Number,asc",
 
     /*
      * Options to appear in the search sort dropdown menu
@@ -468,8 +481,12 @@ module.exports = {
     },
 
     collectionSortByOptions: {
+        "Call Number (asc)": "Call Number,asc", // default
+        "Call Number (desc)": "Call Number,desc",
         "Title (a - z)": "Title,asc",
-        "Title (z - a)": "Title,desc"
+        "Title (z - a)": "Title,desc",
+        "Creation Date (asc)": "Creation Date,asc",
+        "Creation Date (desc)": "Creation Date,desc"
     },
 
     /*
@@ -518,6 +535,9 @@ module.exports = {
         },
         "Collection": {
             "path": "is_member_of_collection"
+        },
+        "Object Type": {
+            "path": "object_type"
         }
     },
 

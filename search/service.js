@@ -145,12 +145,8 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
             if(field.boost) {
               keywordObj["boost"] = field.boost;
             }
-
             fieldObj[field.field] = keywordObj;
           }
-          // else if(queryType == "wildcard") {
-            
-          // }
           else {
             fieldObj[field.field] = terms;
           }
@@ -235,41 +231,37 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
           let query = {};
           count++;
 
-          // Get the facet key from the configuration, using the facet name
+          // Get the facet config
           facetData = config.facets[facet];
-          // Add to filters
-          query[facetData.path] = value;
 
-          let filter = {
-            "bool": {
-              "must": []
+          // Add facet to filters
+          if(facetData.path) {
+            query[facetData.path] = value;
+            let filter = {
+              "bool": {
+                "must": []
+              }
             }
-          }
-          filter.bool.must.push({
-            "match_phrase": query 
-          });
-
-          if(facetData.matchField && facetData.matchField.length > 0) {
-            query = {};
-            query[facetData.matchField] = facetData.matchTerm; 
             filter.bool.must.push({
               "match_phrase": query 
             });
+
+            if(facetData.matchField && facetData.matchField.length > 0) {
+              query = {};
+              query[facetData.matchField] = facetData.matchTerm; 
+              filter.bool.must.push({
+                "match_phrase": query 
+              });
+            }
+            filters.push(filter);
           }
-          filters.push(filter);
         }
       }
     }
 
     //If a date range is present, add the date range query to the must match array
-    if(daterange) {
-      let fullDate = {};
-      if(!/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/.test(daterange.from)) {
-        fullDate["from"] = daterange.from + "-01-01";
-      }
-      if(!/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/.test(daterange.to)) {
-        fullDate["to"] = daterange.to + "-12-31";
-      }
+    if(daterange && daterange.from && daterange.to) {
+      let fullDate = Helper.formatDateFieldForElasticQuery(daterange);
       filters.push(Helper.getDateRangeQuery(fullDate));
     }
 
@@ -317,12 +309,8 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
       }
     }
 
-    if(config.nodeEnv == "devlog") {console.log("DEV query object:", util.inspect(queryObj, {showHidden: false, depth: null}));}
-
-    // Get elasticsearch aggregations object 
     var facetAggregations = Helper.getFacetAggregationObject(config.facets);
 
-    // Apply sort option
     let sortArr = [];
     if(sort) {
       let data = {},
@@ -330,31 +318,26 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
 
       if(field) {
         if(field.matchField && field.matchField.length > 0) {
-          // build nested data sort query
           let filterObj = {
             "term": {}
           };
 
-          // Apply the sort if all of the required values are present and valid
           if(field.matchTerm && field.matchTerm.length > 0) {
-            // Build the sort query object
             filterObj.term[field.matchField + ".keyword"] = field.matchTerm;
             data[field.path + ".keyword"] = {
-              "order": sort.order,
+              "order": sort.order || "asc",
               "nested_path": field.path.substring(0,field.path.lastIndexOf(".")),
               "nested_filter": filterObj
             }
           }
         }
         else {
-          // Sort on non nested data
           data[field.path + ".keyword"] = {
-            "order": sort.order
+            "order": sort.order || "asc"
           }
         }
       }
-
-      sortArr.push(data); // sortData
+      sortArr.push(data);
     }
 
     // Create elasticsearch data object
@@ -369,6 +352,8 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
         aggregations: facetAggregations
       }
     }
+
+    if(config.nodeEnv == "devlog") {console.log("DEV query object:", util.inspect(data, {showHidden: false, depth: null}));}
 
     // Query the index
     es.search(data, function (error, response, status) {
