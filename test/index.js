@@ -244,10 +244,52 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Collections Facet caret before click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fa-caret-right');
+          });
+        });
+
         //click the collection accordion
-        it('Collections Accordion click', function() {
+        it('Collections Accordion 1st click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
           .click();
+        });
+
+        it('Collections Accordion not hidden', function() {
+          return browser.findElement(webdriver.By.id('collections-window'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(true);
+          });
+        });
+
+        it('Collections Facet caret after 1st click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fa-caret-down');
+          });
+        });
+
+        it('Collections Accordion 2nd click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
+          .click();
+        });
+
+        it('Collections Accordion hidden', function() {
+          return browser.findElement(webdriver.By.id('collections-window'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(true);
+          });
+        });
+
+        it('Collections Facet caret after 2nd click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fa-caret-right');
+          });
         });
         //TODO add tests to see if the window is populated
 
