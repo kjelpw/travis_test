@@ -176,10 +176,11 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        //inserted 3 still test into elasticsearch images, should show 3 in the facet
         it('Type Facet contents: still image count', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[1]/div/div[3]/div'))
           .getAttribute('innerHTML').then(function(text) {
-            expect(text).to.include('555');
+            expect(text).to.include('3');
           });
         });
 
