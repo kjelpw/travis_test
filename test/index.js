@@ -281,7 +281,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.id('collections-window'))
           .isDisplayed()
           .then(function(visible) {
-            expect(visible).to.equal(true);
+            expect(visible).to.equal(false);
           });
         });
 
