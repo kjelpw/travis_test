@@ -308,10 +308,60 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Creator Accordion hidden', function() {
+          return browser.findElement(webdriver.By.id('Creator-window'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(false);
+          });
+        });
+
+        it('Creator Facet caret before click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fa-caret-right');
+          });
+        });
+
         //click the creator accordion
-        it('Creator Accordion click', function() {
+        it('Creator Accordion 1st click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
           .click();
+        });
+
+        it('Creator Accordion not hidden', function() {
+          return browser.findElement(webdriver.By.id('Creator-window'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(true);
+          });
+        });
+
+        it('Creator Facet caret after click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fa-caret-down');
+          });
+        });
+
+        it('Creator Accordion 2nd click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
+          .click();
+        });
+
+        it('Creator Accordion hidden', function() {
+          return browser.findElement(webdriver.By.id('Creator-window'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(false);
+          });
+        });
+
+        it('Creator Facet caret before click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
+          .getAttribute('class').then(function(text) {
+            expect(text).to.include('fa-caret-right');
+          });
         });
         //TODO add tests to see if the window is populated
       });
