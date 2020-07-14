@@ -147,7 +147,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
 
       //for the accorions/facets on the main page
-      describe('Facet tests', function() {
+      describe('Facet tests (frontpage)', function() {
         //navigate to the frontapge
         before(function() {
           return browser.get(frontend);
@@ -181,6 +181,27 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[1]/div/div[3]/div'))
           .getAttribute('innerHTML').then(function(text) {
             expect(text).to.include('3');
+          });
+        });
+
+        it('Type Facet contents: text count', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[2]/div/div[3]/div'))
+          .getAttribute('innerHTML').then(function(text) {
+            expect(text).to.include('0');
+          });
+        });
+
+        it('Type Facet contents: moving image count', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[3]/div/div[3]/div'))
+          .getAttribute('innerHTML').then(function(text) {
+            expect(text).to.include('0');
+          });
+        });
+
+        it('Type Facet contents: sound recording count', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[4]/div/div[3]/div'))
+          .getAttribute('innerHTML').then(function(text) {
+            expect(text).to.include('0');
           });
         });
 
