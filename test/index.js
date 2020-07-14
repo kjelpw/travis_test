@@ -176,6 +176,13 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Type Facet contents: still image count', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[1]/div/div[3]/div'))
+          .getAttribute('innerHTML').then(function(text) {
+            expect(text).to.include('555');
+          });
+        });
+
         //click the type facet
         it('Type Facet 1st click', function() {
           return browser.findElement(webdriver.By.id('type-facet'))
