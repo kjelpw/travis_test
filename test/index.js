@@ -86,7 +86,8 @@ describe('Special Collections (Selenium) Tests', function() {
     // executes before everything
     before(function() {
         var opts = new chrome.Options()
-        .addArguments('--no-sandbox').addArguments('--disable-dev-shm-usage').addArguments('--headless');
+        .addArguments('--no-sandbox')
+        .addArguments('--disable-dev-shm-usage').addArguments('--headless');
         browser = new webdriver.Builder().
         withCapabilities(webdriver.Capabilities.chrome()).setChromeOptions(opts).build();
         // withCapabilities(webdriver.Capabilities.safari()).
@@ -368,7 +369,8 @@ describe('Special Collections (Selenium) Tests', function() {
 
         it('Creator Facet caret after click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
-          .getAttribute('class').then(function(text) {
+          .getAttribute('class')
+          .then(function(text) {
             expect(text).to.include('fa-caret-down');
           });
         });
@@ -388,11 +390,36 @@ describe('Special Collections (Selenium) Tests', function() {
 
         it('Creator Facet caret before click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
-          .getAttribute('class').then(function(text) {
+          .getAttribute('class')
+          .then(function(text) {
             expect(text).to.include('fa-caret-right');
           });
         });
         //TODO add tests to see if the window is populated
+      });
+
+      describe('Object attribute tests', function() {
+        const test_object1 = 'http://localhost:9007/object/81c733ec-b597-48d1-9488-90f2a67627ed'
+
+        before(function() {
+          return browser.get(test_object1);
+        });
+
+        it('In Collections link test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
+          .getAttribute('href')
+          .then(function(text) {
+            expect(text).to.equal('https://specialcollections.du.edu/object/ab0ed225-3a5f-4c49-9a8e-d104a9b0845f');
+          });
+        });
+
+        it('In Collections title test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.equal('Beck Archives Photograph Collection');
+          });
+        });
       });
 
       //further tests
