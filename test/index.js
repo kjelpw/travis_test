@@ -399,7 +399,7 @@ describe('Special Collections (Selenium) Tests', function() {
       });
 
       describe('Object attribute tests', function() {
-        const test_object1 = 'http://localhost:9007/object/81c733ec-b597-48d1-9488-90f2a67627ed'
+        const test_object1 = 'http://localhost:9007/object/7479257d-3c34-4e87-8358-05460a828ca1'
 
         before(function() {
           return browser.get(test_object1);
@@ -409,7 +409,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
           .getAttribute('href')
           .then(function(text) {
-            expect(text).to.equal('https://specialcollections.du.edu/object/ab0ed225-3a5f-4c49-9a8e-d104a9b0845f');
+            expect(text).to.include('https://specialcollections.du.edu/object/1e1fce45-dd23-48bd-a8cf-5654a83d989b');
           });
         });
 
@@ -417,7 +417,15 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
           .getAttribute('innerHTML')
           .then(function(text) {
-            expect(text).to.equal('Beck Archives Photograph Collection');
+            expect(text).to.equal('Division of Marketing and Communications Records');
+          });
+        });
+
+        it('title test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[5]/td[2]/p'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.equal('Founders Bell, 2008 November 19');
           });
         });
       });
