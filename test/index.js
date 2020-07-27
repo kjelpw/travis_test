@@ -398,6 +398,8 @@ describe('Special Collections (Selenium) Tests', function() {
         //TODO add tests to see if the window is populated
       });
 
+
+
       describe('Object attribute tests', function() {
         const test_object1 = 'http://localhost:9007/object/7479257d-3c34-4e87-8358-05460a828ca1'
 
