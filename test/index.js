@@ -428,6 +428,36 @@ describe('Special Collections (Selenium) Tests', function() {
             expect(text).to.equal('Founders Bell, 2008 November 19');
           });
         });
+
+        it('creator test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[6]/td[2]/p'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.equal('Armstrong, Wayne, 1961-');
+          });
+        });
+
+        it('creation date test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[7]/td[2]/p'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.equal('2008 November 19');
+          });
+        });
+
+        it('abstract test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[8]/td[2]/p'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            //not checking the whole abstract text, just making sure part is included and assuming threst is
+            expect(text).to.include('The Founders Bell, situated in front of the alumni center at the time this photo was taken.');
+          });
+        });
+
+        //cite item and download file
+
+
+
       });
 
       //further tests
