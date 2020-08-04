@@ -11,8 +11,8 @@ services:
 addons:
   chrome: stable
 before_install:
-- openssl aes-256-cbc -K $encrypted_359d1b2cc923_key -iv $encrypted_359d1b2cc923_iv
-  -in test\\.env.enc -out .env -d
+- openssl aes-256-cbc -K $encrypted_b42a035e1c04_key -iv $encrypted_b42a035e1c04_iv
+  -in /.env.enc -out .env -d
 - mv test/cache .
 install:
 - npm install
