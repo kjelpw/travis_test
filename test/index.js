@@ -411,7 +411,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
           .getAttribute('href')
           .then(function(text) {
-            expect(text).to.include('https://specialcollections.du.edu/object/1e1fce45-dd23-48bd-a8cf-5654a83d989b');
+            expect(text).to.include('/object/61ed6a68-618b-48eb-b9bd-3e7484e0590a');
           });
         });
 
