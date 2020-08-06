@@ -451,15 +451,50 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[8]/td[2]/p'))
           .getAttribute('innerHTML')
           .then(function(text) {
-            //not checking the whole abstract text, just making sure part is included and assuming threst is
+            //not checking the whole abstract text, just making sure part is included and assuming the rest is
             expect(text).to.include('The Founders Bell, situated in front of the alumni center at the time this photo was taken.');
           });
         });
 
         //cite item and download file
+      });
 
 
 
+
+      describe('Collection render tests', function() {
+        before(function() {
+          return browser.get('http://localhost:9007/');
+        });
+
+        it('Collection thumbnail', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[2]/div/div[3]/div/dl/a/dt/div/img'))
+          .getAttribute('src')
+          .then(function(text) {
+            expect(text).to.include('http://localhost:9007/datastream/61ed6a68-618b-48eb-b9bd-3e7484e0590a/TN');
+          });
+        });
+
+        it('Collection thumbnail link', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[2]/div/div[3]/div/dl/a'))
+          .getAttribute('href')
+          .then(function(text) {
+            expect(text).to.include('http://localhost:9007/object/61ed6a68-618b-48eb-b9bd-3e7484e0590a')
+          });
+        });
+
+        it('Collection title', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[2]/div/div[3]/div/dl/a/dd/div/h4'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.include('Test Collection');
+          });
+        });
+
+        it('collection click', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[2]/div/div[3]/div/dl/a'))
+          .click();
+        });
       });
 
       //further tests
