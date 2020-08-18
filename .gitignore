@@ -1,5 +1,6 @@
 .DS_Store
 .env
+test/.env
 node_modules/
 *.sh
 files/default/thumbnail/*
