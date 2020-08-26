@@ -3,6 +3,7 @@ node_js:
   - 10.16.3
 env:
   global:
+    # removing these breaks the build sometimes, don't know what some do, don't touch
     - CXX=g++-4.8
     - CHROME_BIN=/usr/bin/google-chrome
     - DISPLAY=:99.0
@@ -11,7 +12,7 @@ services:
 addons:
   chrome: stable
 before_install:
-  # unencrypt .env file
+  # unencrypt .env file and move to root project folder
   - cd test
   - openssl aes-256-cbc -K $encrypted_3c84dcdc6bbe_key -iv $encrypted_3c84dcdc6bbe_iv
     -in .env.enc -out .env -d
@@ -36,6 +37,7 @@ before_script:
     -d @test/test-object2.json
   - curl -XPOST http://localhost:9200/repo_public/data/d3dcaa18-d441-4396-9f0a-887e1277b279
     -d @test/test-object3.json
+  # check elasticsearch startup
   - curl -v http://localhost:9200/
   - curl -v http://localhost:9200/repo_public
 script:
