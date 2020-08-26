@@ -21,6 +21,7 @@ $( document ).ready(function() {
 				// Replace UV viewer content with the Kaltura viewer content
 		  		$( "#uv" ).css("visibility", "visible");
 		  		$( "#uv" ).css("background-color", "#000000");
+	  			$("#uv .imageBtn.share").css("visibility", "hidden");
 		  		$("[id^=mep_]").html("");
 		  		$("[id^=mep_]").append(params.viewerContent);
 
@@ -31,9 +32,9 @@ $( document ).ready(function() {
 						baseUrl = uri.substring(0, uri.indexOf("/object"));
 
 					// Get the Kaltura viewer content
-		  			let kalturaViewerUri = baseUrl + "/viewer/kaltura/" + viewerContent.objectID + "/" + part;
+		  			let kalturaViewerUri = baseUrl + "/viewer/kaltura/" + params.objectID + "/" + part;
 		  			$.get(kalturaViewerUri, function(viewerContent, status) {
-					    if(status == "success") {$("[id^=mep_]").html(params.viewerContent)}
+					    if(status == "success") {$("[id^=mep_]").html(viewerContent)}
 					    else {console.log("Error: Can not retrieve Kaltura content. Status is ", status)}
 					});
 		  		});

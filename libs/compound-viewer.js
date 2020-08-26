@@ -36,8 +36,7 @@ const 	config = require('../config/' + process.env.CONFIGURATION_FILE),
  */
 exports.getCompoundObjectViewer = function(object, page, apikey=null) {
  	var viewer = "",
- 	    embedKaltura = false;
- 	    
+ 	    embedKaltura = false; 
  	if(config.objectTypes.audio.includes(object.mime_type) || config.objectTypes.video.includes(object.mime_type)) {
  		embedKaltura = config.universalViewerKalturaPlayer;
  	}
@@ -96,8 +95,8 @@ var validateCompoundObject = function(object) {
 	else if(config.objectTypes["pdf"].includes(mimeType)) {
 		isValid = validateCompoundObjectParts(parts || [], ["pdf"]);
 	}
-	else if(config.objectTypes["smallImage"].includes(mimeType) || config.objectTypes["largeImage"].includes(mimeType)) {
-		isValid = validateCompoundObjectParts(parts || [], ["smallImage", "largeImage"]);
+	else if(config.objectTypes["still image"].includes(mimeType)) {
+		isValid = validateCompoundObjectParts(parts || [], ["still image"]);
 	}
 	else {
 		console.log("Invalid compound object mime type");

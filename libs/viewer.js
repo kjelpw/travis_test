@@ -65,11 +65,7 @@ exports.getObjectViewer = function(object, mimeType="", apikey=null) {
  			viewer += getVideoViewer(object, apikey);
  			break;
 
- 		case "smallImage":
- 			viewer += getLargeImageViewer(object, apikey);
- 			break;
-
- 		case "largeImage":
+ 		case "still image":
  			viewer += getLargeImageViewer(object, apikey);
  			break;
 
@@ -277,24 +273,16 @@ function getJWPlayer(thumbnailUrl, streamUrl, fileExtension, jwPlayerPath) {
 function getIIIFObjectViewer(object, page=null, embedKalturaViewer=false, apikey="") {
 	var params = {},
 		relativePath = "./../..",
-		eventTriggers = "";
+		eventTriggers = "",
+		pid = object.pid;
 
 	// Add page links for compound object viewer
 	if(object.is_compound) {
-		let parts = AppHelper.getCompoundObjectPart(object, -1) || [];
-		if(page && parts.length > 0) {
-			let pageVal = parseInt(page),
-			    offset = (config.IIIFManifestPageSize || 10) * pageVal,
-				prev = (pageVal > 1) ? pageVal-1 : null, 
-				next = (parts.length > offset) ? pageVal+1 : null;
-				params["prevLink"] = prev ? config.rootUrl + "/object/" + object.pid + "/" + prev.toString() : null;
-				params["nextLink"] = next ? config.rootUrl + "/object/" + object.pid + "/" + next.toString() : null;
-				relativePath = "./../../..";
-		}
+		object = AppHelper.getCompoundObjectPart(object, page) || [];
 	}
 
 	params["embedKalturaViewer"] = embedKalturaViewer;
-	params["objectID"] = object.pid;
+	params["objectID"] = pid;
 	params["universalViewerMediaElement"] = config.universalViewerMediaElement || "";
 	params["pageSize"] = config.IIIFManifestPageSize || 10;
 
@@ -310,7 +298,7 @@ function getIIIFObjectViewer(object, page=null, embedKalturaViewer=false, apikey
 		viewer += '<script>';
 		viewer += 'window.addEventListener("uvLoaded", function (e) {';
 		viewer += 'createUV("#uv", {';
-		viewer += 'iiifResourceUri: "' + config.IIIFUrl + '/' + object.pid + '/manifest' + page + apikey + '",';
+		viewer += 'iiifResourceUri: "' + config.IIIFUrl + '/' + pid + '/manifest' + page + apikey + '",';
 		viewer += 'configUri: "' + config.rootUrl + '/libs/universalviewer/uv-config.json",';
 		viewer += 'root: "' + relativePath + config.appPath + '/libs/universalviewer/uv",';
 		viewer += '}, new UV.URLDataProvider());';

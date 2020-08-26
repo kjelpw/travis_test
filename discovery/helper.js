@@ -70,20 +70,25 @@ var config = require('../config/' + process.env.CONFIGURATION_FILE),
 }
 
  /**
- * Get facet counts by name
+ * Get data for frontpage type list
  *
  * @param {Array} facets - Elastic aggregations object
  * @return {Object} Object of facet count data
  */
-exports.getTypeFacetTotalsObject = function(facets) {
-  var totals = {};
-  for(var facet of facets.Type.buckets) {
-    for(var key in config.facetLabelNormalization.Type) {
-      if(config.facetLabelNormalization.Type[key].includes(facet.key)) {
+exports.getTypeDisplayList = function(facets) {
+  var totals = {},
+      typeLabel = config.typeLabel || "Type";
+  for(var facet of facets[typeLabel].buckets) {
+    for(var key in config.facetLabelNormalization[typeLabel]) {
+      if(config.facetLabelNormalization[typeLabel][key].includes(facet.key)) {
         totals[key] = {
           "count": facet.doc_count,
           "key": facet.key
-        };
+        }; 
+
+        if(config.facetThumbnails[typeLabel][key]) {
+          totals[key]["thumbnail"] = config.facetThumbnails[typeLabel][key];
+        }
       }
     }
   }
@@ -216,11 +221,11 @@ exports.getIIIFObjectType = function(mimeType) {
  * @return {String} III "format" mimetype
  */
 exports.getIIIFFormat = function(mimeType) {
-  let objType = getObjectType(mimeType),
+  let objType = AppHelper.getObjectType(mimeType),
       format = "";
+
   switch(objType) {
-    case "smallImage":
-    case "largeImage":
+    case "still image":
       format = "image/jpg";
       break;
     case "audio":
@@ -238,73 +243,6 @@ exports.getIIIFFormat = function(mimeType) {
   }
   return format;
 }
-
- /**
- * Finds the DDU datastream ID that corresponds with an object's mime type
- *
- * @param {String} mimeType - Object mime type (ex "audio/mp3")
- * @return {String} DDU datastream ID
- */
-exports.getDsType = function(mimeType) {
-  let datastreams = config.datastreams,
-      datastream = "",
-      objectType = null;
-
-  for(var key in datastreams) {
-    if(datastreams[key].includes(mimeType)) {
-      datastream = key;
-    }
-  }
-
-  return datastream;
-}
-
- /**
- * Finds the DDU object type that corresponds with an object's mime type
- *
- * @param {String} mimeType - Object mime type (ex "audio/mp3")
- * @return {String} DDU object type
- */
-var getObjectType = function(mimeType) {
-  let type = "";
-  for(var key in config.objectTypes) {
-    if(config.objectTypes[key].includes(mimeType)) {
-      type = key;
-    }
-  }
-  return type;
-}
-exports.getObjectType = getObjectType;
-
- /**
- * Returns the HTTP response "content-type" for an object, based on its object file extension
- * All thumbnail datastreams are image/jpg at this point
- *
- * @param {String} datastream - Object datastream ID
- * @param {String} mimeType - Object mime type (ex "audio/mp3")
- * @return {String} HTTP content type
- */
-var getContentType = function(datastream, object, part, mimeType) {
-  let contentType = "application/octet-stream";
-  if(part && object.display_record.parts) {
-    part = parseInt(part);
-    object = object.display_record.parts[part-1] || null;
-  }
-
-  if(datastream.toLowerCase() == "tn") {
-    contentType = "image/jpg";
-  }
-  else if(datastream.toLowerCase() != "object") {
-    contentType = config.contentTypes[datastream] || "";
-  }
-  else if(object && object.object) {
-    let extIndex = object.object.lastIndexOf("."),
-        ext = object.object.substring(extIndex+1);
-        contentType = config.contentTypes[ext] || "";
-  }
-  return contentType;
-}
-exports.getContentType = getContentType;
 
  /**
  * Create an array of citation data objects for the view model
@@ -390,6 +328,40 @@ exports.getSortDataArray = function(sort) {
     }
   }
   return sortData;
+}
+
+ /**
+ * Return an array of links to download the object file 
+ * Currently only single link option, creates link to download file extension registered to the object's mime type
+ *
+ * @param {Object} object - DDU Elastic index doc
+ * @return {Array.<String>} Array of download link uris
+ */
+exports.getFileDownloadLinks = function(object, dsid, part=null) {
+  let links = [];
+  // Object path is required for object download. If no path, do not add download links
+  if(object && object.object) {
+    let extension = getFileExtensionForMimeType(object.mime_type || "");
+    if(!extension) {
+      let pathExtension = getFileExtensionFromFilePath(object.object);
+      if(isValidExtension(pathExtension)) {
+        extension = pathExtension;
+      }
+    }
+    // 'part' can be null here
+    if(extension) {
+      let link = {
+        uri: config.rootUrl + "/datastream/" + object.pid + "/" + dsid + "/" + part + "/" + object.pid + "." + extension,
+        filename: object.pid + "." + extension,
+        extension: extension
+      };
+      links.push(link);
+    }
+  }
+  else {
+    console.log("Can not create download links for object " + object.pid + ", object path is missing");
+  }
+  return links;
 }
 
 

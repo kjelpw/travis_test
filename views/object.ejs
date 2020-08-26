@@ -6,9 +6,13 @@
     <h5><%- error %></h5>
   <% } %>
 	<br/>
-        <div class="content-message">Notice: Our digital collections contain materials that are racist, sexist, and may be painful or traumatizing to researchers.</div>
-        <br/>
+  <div class="content-message">Notice: Our digital collections contain materials that are racist, sexist, and may be painful or traumatizing to researchers.</div>
+  <br/>
+
   <div class="viewer-wrapper row">
+    <% if(returnLink) { %>
+      <div class="left-float-anchor-list"><a href="<%= returnLink %>" alt="Return to search results">Return to search results</a></div>
+    <% } %>
     <div id="object-view" class="col-md-12">
       <%- viewer %>
     </div>
@@ -37,8 +41,8 @@
           <% if(citations) { %>
             <button id="view-citations" alt="View Citations" type="button">Cite This Item</button>
           <% } %>
-          <% if(downloads) { %>
-            <a href="<%= downloads[link].uri %>" download><button id="file-download" class="download-button" alt="Download Item">Download File</button></a>
+          <% if(downloads.length > 0) { %>
+            <a href="<%= downloads[link].uri %>" download><button id="file-download" class="download-button" alt="Download <%= downloads[0].extension %>">Download <%= downloads[0].extension %></button></a>
           <% } %>
           <% if(transcript) { %>
             <button id="view-transcript" alt="View Transcript" type="button">View Transcript</button>
@@ -76,9 +80,8 @@
   <% } %>
 
   <div class="container mods-display metadata-content">
-    <!-- <div class="table-responsive mods-display metadata-content" style="display: none"> --> <!-- If hidden by default, shown with 'view details' button -->
     <div class="table-responsive">
-        <table class="table data-table" summary="<% for (var key in summary) { %><%= summary[key] %> <% } %>">
+        <table class="table data-table">
           <tr style="display: none;">
             <th scope="col">Data Type</th>  
             <th scope="col">Value</th>  

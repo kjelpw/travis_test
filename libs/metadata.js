@@ -105,7 +105,7 @@ exports.createSummaryDisplayObject = function(result) {
 		pathArray = summaryDisplay[key].path.split(".");
 		extractValues(pathArray, displayRecord, summaryDisplay[key].matchField || null, summaryDisplay[key].matchValue || null, summaryDisplay[key].condition || "true", values);
 		if(values.length > 0) {
-			displayObj[key] = values;
+			displayObj[key] = Helper.stripHtmlTags(values);
 		}
 	}
 
@@ -140,19 +140,59 @@ exports.createMetadataDisplayObject = function(result, collections=[]) {
 		displayObj["In Collections"] = titles;
 	}
 
-	// Build the metadata display
+	// Add fields external to the main display configuration
 	if(result.type) {
 		displayObj["Item Type"] = result.type;
 	}
 	if(result.mime_type) {
+		if(!displayObj["Item Type"]) {
+			displayObj["Item Type"] = Helper.getObjectType(result.mime_type);
+		}
 		displayObj["Mimetype"] = result.mime_type;
 	}
+
+	// Add the fields and values to the display, apply config options and formatting to the field values
 	let pathArray;
 	for(var key in metadataDisplay) {
 		let values = [];
 		pathArray = metadataDisplay[key].path.split(".") || [];
 		extractValues(pathArray, displayRecord, metadataDisplay[key].matchField || null, metadataDisplay[key].matchValue || null, metadataDisplay[key].condition || "true", values);
 		if(values.length > 0) {
+			// Remove html elements 
+			if(config.removemetadataDisplayHtml) {
+				Helper.stripHtmlTags(values);
+			}
+
+			// Truncate the text, add hidden section containing the full text, and a link to show the hidden section
+			if(metadataDisplay[key].truncateText) {
+				let cullLength = parseInt(metadataDisplay[key].truncateText), 
+					content = "", hiddenText, length;
+
+				// Concat the array elements into one string
+				for(var index in values) {
+					content += (values[index] + "<br><br>");
+				}
+
+				// Truncate the string if its length exceeds the threshold by a small amount
+				length = content.length;
+				if(length > (metadataDisplay[key].truncateText + 20)) {
+					hiddenText = '<a aria-label="show all text" class="metadata-in-text-link" style="margin-left: 10px" onclick="javascript:this.nextSibling.style.display = \'inline\'; this.style.display = \'none\'">Show all text</a><span style="display: none">' + content.substring(cullLength, length) + '</span>';
+					content = content.substring(0, cullLength) + hiddenText;
+				}
+				values = content;
+			}
+
+			// Convert values to links, per configuration
+			if(metadataDisplay[key].link) {
+				for(var index in values) {
+					// Facet search option
+					if(metadataDisplay[key].link.facetSearch) {
+						let facet = metadataDisplay[key].link.facetSearch;
+						values[index] = '<a href="' + config.rootUrl + '/search?q=&f[' + facet + '][]=' + values[index] + '">' + values[index] + '</a>';
+					}
+				}
+			}
+
 			displayObj[key] = values;
 		}
 	}
@@ -176,13 +216,8 @@ exports.addResultMetadataDisplays = function(resultArray) {
 
 	for(var result of resultArray) {
 		metadata = {};
-		if(result.itemType) {
-			metadata["Type"] = result.itemType;
-		}
-
 		if(result.objectType == "collection") {
 			resultsDisplay = metadataConfig.resultsDisplay["collection"] || {};
-			metadata["Type"] = "Collection";
 		}
 		else {
 			resultsDisplay = metadataConfig.resultsDisplay["default"] || {};
@@ -198,8 +233,18 @@ exports.addResultMetadataDisplays = function(resultArray) {
 
 			extractValues(pathArray, displayRecord, resultsDisplay[key].matchField || null, resultsDisplay[key].matchValue || null, resultsDisplay[key].condition || "true", values);
 			if(values.length > 0) {
-				metadata[key] = values;
+				metadata[key] = Helper.stripHtmlTags(values);
 			}
+		}
+
+		if(result.objectType && result.objectType.toLowerCase() == "collection") {
+			metadata["Type"] = "Collection";
+		}
+		else if(result.itemType) {
+			metadata["Type"] = result.itemType;
+		}
+		else if(result.mimeType) {
+			metadata["Type"] = Helper.getObjectType(result.mimeType);
 		}
 
 		if(Helper.isObjectEmpty(metadata)) {

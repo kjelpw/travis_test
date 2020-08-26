@@ -15,11 +15,36 @@ $( document ).ready(function() {
 	});
 
 	$('#sort-by-select').change(function(event) {
-		var searchUrl = decodeURIComponent(window.location.href).replace(/[&?]sort=[a-zA-Z0-9, ]+/g, "");
+		var searchUrl = decodeURIComponent(window.location.href).replace(/[&?]sort=[a-zA-Z0-9, ]+/g, "").replace(/[&?]page=[a-zA-Z0-9, ]+/g, "");
 		var prefix = searchUrl.indexOf("?") > 0 ? "&" : "?";
 		searchUrl += prefix;
 		searchUrl += "sort=" + $('#sort-by-select').val();
 		window.location.replace(encodeURI(searchUrl));
+	});
+
+	function submitGotoPage() {
+		if($('#set-page-number').val().match(/^[0-9]+$/)) {
+			var searchUrl = decodeURIComponent(window.location.href).replace(/[&?]page=[a-zA-Z0-9, ]+/g, ""),
+				val = $('#set-page-number').val() <= parseInt($('#page-count').html()) ? $('#set-page-number').val() : parseInt($('#page-count').html());
+
+			if(searchUrl.indexOf("?") >= 0) { searchUrl += ("&page=" + val) }
+			else { searchUrl += ("?page=" + val) }
+			window.location.replace(encodeURI(searchUrl));
+		}
+		else {
+			console.log("Invalid input, must be integer")
+		}
+	}
+
+	$( "#goto-page-form" ).bind( "keydown", function(event) {
+		if(event.keyCode == 13) {
+			event.preventDefault();
+		  	submitGotoPage(); 
+		}
+	});
+
+	$('#set-page-number-button').click(function(event) {
+		submitGotoPage(); 
 	});
 
 	$("#add-query-button").click(function(event) {
@@ -43,9 +68,13 @@ $( document ).ready(function() {
   	$("#view-citations").click(function(event) {
   		if($(".object-citations").hasClass("panel-collapsed")) {
   			$(".object-citations").removeClass("panel-collapsed");
+  			$("#view-citations").html("Hide Citations");
+  			$("#view-citations").attr("alt", "Hide Citations");
   		}
   		else {
   			$(".object-citations").addClass("panel-collapsed");
+  			$("#view-citations").html("Cite This Item");
+  			$("#view-citations").attr("alt", "View Citations");
   		}
 	});
 

@@ -62,10 +62,6 @@ All other content is released under [CC-BY-4.0](https://creativecommons.org/lice
         REPOSITORY_USER={repository username}
         REPOSITORY_PWD={repository password}
         PDF_JS_VIEWER_PORT={port}
-        CANTALOUPE_URL={cantaloupe api domain}
-        CANTALOUPE_PORT={port}
-        IIIF_URL={iiif api}
-
         IIIF_IMAGE_SERVER_URL={cantaloupe api domain}
         IIIF_IMAGE_SERVER_PATH={relative path to cantaloupe endpoint, if any}
         IIIF_DOMAIN={iiif api domain}
@@ -95,6 +91,9 @@ All other content is released under [CC-BY-4.0](https://creativecommons.org/lice
 "is_compound": {boolean} Flag to identify a compound object (an object with constituent parts)
 "display_record": {object} Object with metadata display fields.  This is accessed to build the metadata displays for the object: Search result display, objet view summary, object metadata display
 "parts": {array} Array of constituent part objects of a parent compound object.  Objects that are not compound do not require this field
+
+##### Sample Index
+elastic-index-mapping.json
 
 ##### Compound Object Required Fields
 
@@ -130,21 +129,20 @@ HttpSource.lookup_strategy = ScriptLookupStrategy
 Implement the following hook to detect an api key in the incoming request, and append it to the DigitalCollections /datastream route request.  This will create the path to the resource in DigitalCollections for Cantaloupe, appending an api key if present in the initial iiif request to Cantaloupe:
 
 def httpsource_resource_info(options = {})
-    # Detect an api key parameter in the request url, retrieve and add it to the DigitalCollections /datastream route url
     request_uri = context['request_uri']
     key = ''
-
+    str = 'http://localhost:9006/datastream/'
+    
     if context['identifier'].include? '__'
+      puts "__ present"
       parts = context['identifier'].split('__')
       key = '?key='
       key.concat(parts[1])
+      str.concat(parts[0])
+    else
+      str.concat(context['identifier'])
     end
 
-    # DigitalCollections datastream route prefix
-    str = 'http://localhost:9006/datastream/'
-    # Object identifier
-    str.concat(context['identifier'])
-    # DigitalCollections datastream route suffix
     str.concat('/object')
     str.concat(key)
   end

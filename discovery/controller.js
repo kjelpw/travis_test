@@ -51,7 +51,8 @@ exports.renderRootCollection = function(req, res) {
 		searchFields: [],
 		facets: {},
 		paginator: {},
-		typeCount: {},
+		typeList: {},
+		typeLabel: config.typeLabel || "Type",
 		error: null,
 		root_url: config.rootUrl,
 		options: {}
@@ -84,8 +85,7 @@ exports.renderRootCollection = function(req, res) {
 				}
 
 				data.facets = Facets.create(facetList, config.rootUrl);
-				data.typeCount = Helper.getTypeFacetTotalsObject(facets);
-				data.facetThumbnails = config.facetThumbnails;
+				data.typeList = Helper.getTypeDisplayList(facets);
 				data.pagination = Paginator.create(data.collections, page, config.defaultHomePageCollectionsCount, response.count, path);
 				data.pagination["anchor"] = "#collections";
 			}
@@ -218,12 +218,13 @@ exports.renderObjectView = function(req, res) {
 		root_url: config.rootUrl
 	},
 	pid = req.params.pid || "";
-
+	
 	Service.fetchObjectByPid(config.elasticsearchPublicIndex, pid, function(error, response) {
 		if(error) {
 			data.error = config.viewerErrorMessage;
 			data.devError = error;
 			console.error(error);
+			res.status(500);
 			res.render('error', data);
 		}
 		else if(response == null) {
@@ -231,6 +232,7 @@ exports.renderObjectView = function(req, res) {
 			data.error = msg;
 			data.devError = msg + pid;
 			console.log(msg + pid);
+			res.status(404);
 			res.render('page-not-found', data);
 		}
 		else {
@@ -258,12 +260,14 @@ exports.renderObjectView = function(req, res) {
 					res.render('error', data);
 				}
 				else {
+					data["returnLink"] = (req.header('Referer') && req.header('Referer').indexOf(config.rootUrl + "/search?") >= 0) ? req.header('Referer') : false;
+
 					Service.getCollectionHeirarchy(object.is_member_of_collection, function(collectionTitles) {
-						data.summary = Metadata.createSummaryDisplayObject(object);
-						object.type = Helper.normalizeLabel("Type", object.type || "")
-						data.metadata = Object.assign(data.metadata, Metadata.createMetadataDisplayObject(object, collectionTitles));
 						data.id = pid;
-						data.downloads = config.enableFileDownload ? AppHelper.getFileDownloadLinks(object, Helper.getDsType(object.mime_type || "")) : null; // PROD
+						object.type = Helper.normalizeLabel("Type", object.type || "")
+						data.summary = Metadata.createSummaryDisplayObject(object);
+						data.metadata = Object.assign(data.metadata, Metadata.createMetadataDisplayObject(object, collectionTitles));
+						data.downloads = config.enableFileDownload ? Helper.getFileDownloadLinks(object, AppHelper.getDsType(object.mime_type || "")) : null; // PROD
 						data.citations = Helper.getCitations(object);
 						res.render('object', data);
 					});
@@ -318,7 +322,6 @@ exports.getDatastream = function(req, res) {
 			else if(stream.headers && stream.headers["content-type"]) {
 				res.set('Content-Type', stream.headers["content-type"]);
 			}
-
 			stream.pipe(res);
 		}
 	});
@@ -445,14 +448,15 @@ exports.getObjectViewer = function(req, res) {
 		if(error) {
 			console.error(error);
 			errors += "Viewer error";
+			res.status(500);
 		}
 		else if(object == null) {
 			console.log("Object not found: " + pid);
 			errors += "Object not found";
+			res.status(404);
 		}
 		else {
 			var page = req.params.page && isNaN(parseInt(req.params.page)) === false ? req.params.page : "1";
-
 			if(AppHelper.isParentObject(object)) {
 				viewer += CompoundViewer.getCompoundObjectViewer(object, page, key)
 			}

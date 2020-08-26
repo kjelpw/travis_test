@@ -62,7 +62,7 @@ module.exports = {
      * Root collection
      */
     topLevelCollectionPID: "codu:root",
-    topLevelCollectionName: "Root Collection",
+    topLevelCollectionName: "Collection",
 
     /*
      * Index type name
@@ -73,6 +73,7 @@ module.exports = {
      * Search results limit
      */
     maxDisplayResults: 1000,
+    maxElasticSearchResultCount: 10000,
 
     /*
      * Max search results on results page
@@ -196,8 +197,7 @@ module.exports = {
     IIIFObjectTypes: {
         "audio": "dctypes:Sound",
         "video": "dctypes:MovingImage",
-        "smallImage": "dctypes:Image",
-        "largeImage": "dctypes:Image",
+        "still image": "dctypes:Image",
         "pdf": "foaf:Document"
     },
 
@@ -239,8 +239,7 @@ module.exports = {
     objectTypes: {
         "audio": ["audio/mpeg", "audio/x-wav", "audio/mp3"],
         "video": ["video/mp4", "video/quicktime", "video/mov"],
-        "smallImage": ["image/png", "image/jpg", "image/jpeg"],
-        "largeImage": ["image/tiff", "image/jp2"],
+        "still image": ["image/png", "image/jpg", "image/jpeg", "image/tiff", "image/jp2"],
         "pdf": ["application/pdf"]
     },
 
@@ -249,7 +248,7 @@ module.exports = {
      * Before a thumbnail is rendered, this location is checked for a source file before requesting it from the repository
      */
     thumbnailDefaultImagePath: "files/default/thumbnail/",
-    thumbnailFileExtension: ".jpg",
+    thumbnailFileExtension: "jpg",
     defaultThumbnailImage: "tn-placeholder.jpg",
     thumbnailImageCacheEnabled: true,
     thumbnailImageCacheLocation: "cache/thumbnail",
@@ -259,7 +258,7 @@ module.exports = {
     /*
      * Object types to cache
      * Add to array
-     * ["audio" | "video" | "smallImage" | "largeImage" | "pdf"]
+     * ["audio" | "video" | "still image" | "pdf"]
      */
     cacheTypes: ["pdf"],
 
@@ -271,8 +270,7 @@ module.exports = {
         "audio": "audio-tn.png",
         "video": "video-tn.png",
         "pdf": "pdf-tn.png",
-        "smallImage": "image-tn.png",
-        "largeImage": "image-tn.png"
+        "still image": "image-tn.png"
     },
 
     /*
@@ -291,13 +289,7 @@ module.exports = {
         },
         "object": {
             "type": {
-                "smallImage": {
-                    "streamOption": "iiif",
-                    "uri": "", 
-                    "source": "repository",
-                    "cache": true
-                },
-                "largeImage": {
+                "still image": {
                     "streamOption": "iiif",
                     "uri": "", 
                     "source": "repository",
@@ -335,6 +327,7 @@ module.exports = {
      * The index field that contains the display record data
      */
     displayRecordField: "display_record",
+    removemetadataDisplayHtml: true,
 
     /*
      * Fulltext search fields 
@@ -375,15 +368,15 @@ module.exports = {
      */ 
     searchAllFields: [
         {"label": "Title", "id": "title", "field": "title", "boost": "5"},
-        {"label": "Collection", "id": "collection", "field": "is_member_of_collection"},
+        {"label": "Collection", "id": "collection", "field": "is_member_of_collection", "boost": "6"},
         {"label": "Creator", "id": "creator", "field": "creator", "boost": "3"},
         {"label": "Subject", "id": "subject", "field": "f_subjects", "boost": "2"},
         {"label": "Topic", "id": "topic", "field": "display_record.subjects.terms.term", "matchField": "display_record.subjects.terms.type", "matchTerm": "topical"},
-        {"label": "Type", "id": "type", "field": "type", "boost": "3"},
+        {"label": "Format", "id": "type", "field": "type", "boost": "3"},
         {"label": "Description", "id": "description", "field": "abstract", "boost": "4"},
         {"label": "Language", "id": "language", "field": "display_record.t_language.text", "boost": "1"},
         {"label": "Creation Date", "id": "create_date", "field": "display_record.dates.expression", "isNestedType": "true", "matchField": "display_record.dates.label", "matchTerm": "creation"},
-        {"label": "Call Number", "id": "call_number", "field": "display_record.identifiers.identifier", "isNestedType": "true", "matchField": "display_record.identifiers.type", "matchTerm": "local"},
+        {"label": "Archival Identifier", "id": "call_number", "field": "display_record.identifiers.identifier", "isNestedType": "true", "matchField": "display_record.identifiers.type", "matchTerm": "local"},
         {"label": "Transcript", "id": "transcript", "field": "transcript"}
     ],
 
@@ -395,7 +388,7 @@ module.exports = {
         {"Title": "title"},
         {"Creator": "creator"},
         {"Subject": "subject"},
-        {"Type": "type"},
+        {"Format": "type"},
         {"Description": "description"}
     ],
 
@@ -407,11 +400,11 @@ module.exports = {
         {"Title": "title"},
         {"Creator": "creator"},
         {"Subject": "subject"},
-        {"Type": "type"},
+        {"Format": "type"},
         {"Description": "description"},
         {"Creation Date": "create_date"},
         {"Language": "language"},
-        {"Call Number": "call_number"},
+        {"Archival Identifier": "call_number"},
         {"Topic": "topic"},
         {"Collection": "collection"},
         {"Transcript Text": "transcript"}
@@ -441,7 +434,7 @@ module.exports = {
             "matchField": "display_record.dates.label",
             "matchTerm": "creation"
         },
-        "Call Number": {
+        "Archival Identifier": {
             "path": "display_record.identifiers.identifier",
             "matchField": "display_record.identifiers.type",
             "matchTerm": "local"
@@ -453,7 +446,7 @@ module.exports = {
         "Title": {
             "path": "title"
         },
-        "Call Number": {
+        "Archival Identifier": {
             "path": "display_record.identifiers.identifier",
             "matchField": "display_record.identifiers.type",
             "matchTerm": "local"
@@ -464,7 +457,7 @@ module.exports = {
             "matchTerm": "creation"
         }
     },
-    defaultCollectionSortField: "Call Number,asc",
+    defaultCollectionSortField: "Creation Date,asc",
 
     /*
      * Options to appear in the search sort dropdown menu
@@ -476,18 +469,19 @@ module.exports = {
         "Title (z - a)": "Title,desc",
         "Creator (a - z)": "Creator,asc",
         "Creator (z - a)": "Creator,desc",
-        "Creation Date (asc)": "Creation Date,asc",
-        "Creation Date (desc)": "Creation Date,desc",
-        "Call Number (asc)": "Call Number,asc"
+        "Creation Date (oldest to newest)": "Creation Date,asc",
+        "Creation Date (newest to oldest)": "Creation Date,desc",
+        "Archival Identifier (a to z)": "Archival Identifier,asc",
+        "Archival Identifier (z to a)": "Archival Identifier,desc"
     },
 
     collectionSortByOptions: {
-        "Call Number (asc)": "Call Number,asc", // default
-        "Call Number (desc)": "Call Number,desc",
+        "Creation Date (oldest to newest)": "Creation Date,asc", // default
+        "Creation Date (newest to oldest)": "Creation Date,desc",
         "Title (a - z)": "Title,asc",
         "Title (z - a)": "Title,desc",
-        "Creation Date (asc)": "Creation Date,asc",
-        "Creation Date (desc)": "Creation Date,desc"
+        "Archival Identifier (a to z)": "Archival Identifier,asc", 
+        "Archival Identifier (z to a)": "Archival Identifier,desc"
     },
 
     /*
@@ -509,6 +503,11 @@ module.exports = {
     searchTermFuzziness: "1",
 
     /*
+     * Label to use for the object "type" facet panels
+     */
+    typeLabel: "Format",
+
+    /*
      * Facets to display on the search results view
      *
      * @example
@@ -526,8 +525,8 @@ module.exports = {
         "Subject": {
             "path": "f_subjects"
         },
-        "Type": {
-            "path": "type"
+        "Format": {
+            "path": "type",
         },
         "Date": {
             "path": "display_record.dates.expression",
@@ -566,14 +565,14 @@ module.exports = {
      /*
      * Facets to display on the front page
      */
-    frontPageFacets: ["Creator", "Subject", "Type"],
+    frontPageFacets: ["Creator", "Subject"],
 
     /*
      * Thumbnail images for the frontpage facet panels
      * Path is relative to the /public folder
      */
     facetThumbnails: {
-        "Type": {
+        "Format": {
             "Still Image": "assets/img/picture-in-frame-TN.png",
             "Moving Image": "assets/img/film-camera-TN.png",
             "Text": "assets/img/old-book-TN.png",
@@ -591,15 +590,15 @@ module.exports = {
      * Create facet display labels to select multiple facet values
      */
     facetLabelNormalization: {
-        "Type": {
+        "Format": {
             "Still Image": ["still image", "image/tiff", "image/jp2", "image/jp3"],
             "Moving Image": ["moving image", "moving_image", "video/mp4"],
             "Text": ["text", "text/plain"],
             "Sound Recording": ["sound recording", "sound recording,[object Object]", "audio/mp3"],
             "Music Recording": ["sound recording-musical"],
-            "Nonmusic Recording": ["sound recording-nonmusical"],
+            "Nonmusic Recording": ["sound recording-nonmusical", "sound recording nonmusical"],
             "Map": ["cartographic"],
-            "Mixed Material": ["mixed material", "application/pdf"],
+            "Mixed Material": ["mixed material", "application/pdf", "mixed materials"],
             "3D Object": ["three dimensional object", "three dimensional object,[object Object]"],
             "Unknown": ["[object Object]"],
             "Collection": ["collection"]
@@ -615,7 +614,7 @@ module.exports = {
      datastreams: {
         "tn": "thumbnail",
         "jpg": ["image/jpeg", "image/jpg"],
-        "tif": ["image/tiff"],
+        "jp2": ["image/tiff"],
         "mp3": ["audio/mp3", "audio/mpeg", "audio/x-wav"],
         "mp4": ["video/mp4"],
         "mov": ["video/mov"],
@@ -624,11 +623,10 @@ module.exports = {
      },
 
      /*
-      * File extensions for the local cache
-      * File will be cached with the file extension that matches the mime type of the object
+      * Cache file extension for mimetype
       */
      fileExtensions: {
-        "tif": ["image/tiff"],
+        "jp2": ["image/tiff"],
         "jpg": ["image/jpg", "image/jpeg"],
         "mp3": ["audio/mp3", "audio/x-wav"],
         "mp4": ["video/mp4"],
@@ -636,7 +634,7 @@ module.exports = {
      },
 
       /*
-      * Content type to associate with each file extension
+      * Content type of each file extension, for datatream response 
       */
      contentTypes: {
         "tif": "image/tiff",

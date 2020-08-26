@@ -70,7 +70,7 @@ module.exports = {
             },
             "Description": {
                 "path": "abstract"
-            }
+            },
         }
     },
 
@@ -104,7 +104,10 @@ module.exports = {
                 "matchValue": "abstract"
             },
             "Subjects": {
-                "path": "subjects.title"
+                "path": "subjects.title",
+                "link": {
+                    "facetSearch": "Subject"
+                }
             },
             "Topics": {
                 "path": "subjects.terms.term",
@@ -131,7 +134,8 @@ module.exports = {
                 "path": "notes.content",
                 "matchField": "type",
                 "matchValue": "abstract",
-                "condition": "false"
+                "condition": "false",
+                "truncateText": "200"
             }
         },
 
