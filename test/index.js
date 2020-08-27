@@ -124,7 +124,7 @@ describe('Special Collections (Selenium) Tests', function() {
         it('Searchbox placeholder text', function() {
           return browser.findElement(webdriver.By.name('q[]')).getAttribute('placeholder').then(function(text) {
             //assert(text, 'Search Keywords(s)');
-            expect(text).to.equal('Search Keyword(s)');
+            expect(text).to.equal('Search Keyword');
           });
         });
 
@@ -154,15 +154,15 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(frontend);
         });
 
-        //check the type facet title
-        it('Type Facet title', function() {
-          return browser.findElement(webdriver.By.id('type-facet'))
+        //check the Format facet title
+        it('Format Facet title', function() {
+          return browser.findElement(webdriver.By.id('Format-facet'))
           .getAttribute('innerHTML').then(function(text) {
-            expect(text).to.include('<h4>Type</h4>');
+            expect(text).to.include('<h4>Format</h4>');
           });
         });
 
-        it('Type Facet not hidden', function() {
+        it('Format Facet not hidden', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
           .isDisplayed()
           .then(function(visible) {
@@ -170,7 +170,7 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
-        it('Type Facet caret before click', function() {
+        it('Format Facet caret before click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
           .getAttribute('class').then(function(text) {
             expect(text).to.include('fa-caret-down');
@@ -178,42 +178,42 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         //inserted 3 still test into elasticsearch images, should show 3 in the facet
-        it('Type Facet contents: still image count', function() {
+        it('Format Facet contents: still image count', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[1]/div/div[3]/div'))
           .getAttribute('innerHTML').then(function(text) {
             expect(text).to.include('3');
           });
         });
 
-        // it('Type Facet contents: text count', function() {
+        // it('Format Facet contents: text count', function() {
         //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[2]/div/div[3]/div'))
         //   .getAttribute('innerHTML').then(function(text) {
         //     expect(text).to.include('0');
         //   });
         // });
         //
-        // it('Type Facet contents: moving image count', function() {
+        // it('Format Facet contents: moving image count', function() {
         //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[3]/div/div[3]/div'))
         //   .getAttribute('innerHTML').then(function(text) {
         //     expect(text).to.include('0');
         //   });
         // });
         //
-        // it('Type Facet contents: sound recording count', function() {
+        // it('Format Facet contents: sound recording count', function() {
         //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[4]/div/div[3]/div'))
         //   .getAttribute('innerHTML').then(function(text) {
         //     expect(text).to.include('0');
         //   });
         // });
 
-        //click the type facet
-        it('Type Facet 1st click', function() {
-          return browser.findElement(webdriver.By.id('type-facet'))
+        //click the Format facet
+        it('Format Facet 1st click', function() {
+          return browser.findElement(webdriver.By.id('Format-facet'))
           .click();
         });
 
         //currently (correctly )fails due to bug, different caret?
-        it('Type Facet hidden', function() {
+        it('Format Facet hidden', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
           .isDisplayed()
           .then(function(visible) {
@@ -221,20 +221,20 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
-        it('Type Facet caret after click', function() {
+        it('Format Facet caret after click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
           .getAttribute('class').then(function(text) {
             expect(text).to.include('a-caret-right');
           });
         });
 
-        //click the type facet
-        it('Type Facet 2nd click', function() {
-          return browser.findElement(webdriver.By.id('type-facet'))
+        //click the Format facet
+        it('Format Facet 2nd click', function() {
+          return browser.findElement(webdriver.By.id('Format-facet'))
           .click();
         });
 
-        it('Type Facet not hidden after 2nd click', function() {
+        it('Format Facet not hidden after 2nd click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
           .isDisplayed()
           .then(function(visible) {
@@ -242,7 +242,7 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
-        it('Type Facet caret after 2nd click', function() {
+        it('Format Facet caret after 2nd click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
           .getAttribute('class').then(function(text) {
             expect(text).to.include('fa-caret-down');
