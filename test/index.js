@@ -156,7 +156,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //check the Format facet title
         it('Format Facet title', function() {
-          return browser.findElement(webdriver.By.id('Format-facet'))
+          return browser.findElement(webdriver.By.xpath('//*[@id="type-facet"]'))
           .getAttribute('innerHTML').then(function(text) {
             expect(text).to.include('<h4>Format</h4>');
           });
