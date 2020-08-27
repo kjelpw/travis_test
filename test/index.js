@@ -208,13 +208,13 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //click the Format facet
         it('Format Facet 1st click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+          return browser.findElement(webdriver.By.xpath('//*[@id="type-facet"]'))
           .click();
         });
 
         //currently (correctly )fails due to bug, different caret?
         it('Format Facet hidden', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+          return browser.findElement(webdriver.By.xpath('//*[@id="type-facet"]'))
           .isDisplayed()
           .then(function(visible) {
             expect(visible).to.equal(false);
