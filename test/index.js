@@ -183,7 +183,6 @@ describe('Special Collections (Selenium) Tests', function() {
           });
 
           //used for counting objects of other types
-
           // it('Format Facet contents: text count', function() {
           //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[2]/div/div[3]/div'))
           //   .getAttribute('innerHTML').then(function(text) {
@@ -605,5 +604,13 @@ describe('Special Collections (Selenium) Tests', function() {
           .click();
         });
       });
+
+
+      //TODO
+      // error page test
+
+      //everything with search
+
+      //downloading object
     });
 });
