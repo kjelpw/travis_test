@@ -412,6 +412,76 @@ describe('Special Collections (Selenium) Tests', function() {
           });
           //TODO add tests to see if the window is populated
         });
+
+        describe('Subject Accordion', function() {
+          //check the Subject accordion title
+          it('Subject Accordion title', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include('Subject');
+            });
+          });
+
+          it('Subject Accordion hidden', function() {
+            return browser.findElement(webdriver.By.id('Subject-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
+          });
+
+          it('Subject Facet caret before click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-right');
+            });
+          });
+
+          //click the Subject accordion
+          it('Subject Accordion 1st click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]'))
+            .click();
+          });
+
+          it('Subject Accordion not hidden', function() {
+            return browser.findElement(webdriver.By.id('Subject-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(true);
+            });
+          });
+
+          it('Subject Facet caret after click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]/i'))
+            .getAttribute('class')
+            .then(function(text) {
+              expect(text).to.include('fa-caret-down');
+            });
+          });
+
+          it('Subject Accordion 2nd click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]'))
+            .click();
+          });
+
+          it('Subject Accordion hidden', function() {
+            return browser.findElement(webdriver.By.id('Subject-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
+          });
+
+          it('Subject Facet caret before click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]/i'))
+            .getAttribute('class')
+            .then(function(text) {
+              expect(text).to.include('fa-caret-right');
+            });
+          });
+          //TODO add tests to see if the window is populated
+        });
       });
 
 
