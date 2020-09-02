@@ -390,6 +390,15 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
+          // author: 'Armstrong, Wayne, 1961-'
+          it('Creator Facet contents: author count', function() {
+            return brower.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[3]/ul/li[1]/span[2]'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include(1);
+            });
+          });
+
           it('Creator Accordion 2nd click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
             .click();
