@@ -420,7 +420,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
           .getAttribute('innerHTML')
           .then(function(text) {
-            expect(text).to.equal('Division of Marketing and Communications Records');
+            expect(text).to.equal('Test Collection');
           });
         });
 
@@ -497,28 +497,5 @@ describe('Special Collections (Selenium) Tests', function() {
           .click();
         });
       });
-
-      //further tests
-      // describe('Accordion test', function() {
-      //   it('Click search button test', function(done) {
-      //       return browser.findElement(webdriver.By.tagName('button')).click().then(function() {
-      //         // TODO: add assertions for promises
-      //         console.log('click accordion');
-      //         browser.findElement(webdriver.By.className('accordion')).click().then(function() {
-      //
-      //             // TODO: add assertions
-      //             console.log('find facet');
-      //             let facet = browser.findElement(webdriver.By.className('facet-name'));
-      //             facet.findElement(webdriver.By.tagName('a')).click().then(function(){
-      //               done();
-      //             });
-      //
-      //             // TODO: add assertions
-      //             // assert.equal('', '');
-      //
-      //         });
-      //       });
-      //     });
-      // });
     });
 });
