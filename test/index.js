@@ -214,7 +214,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //currently (correctly )fails due to bug, different caret?
         it('Format Facet hidden', function() {
-          return browser.findElement(webdriver.By.xpath('//*[@id="type-facet"]'))
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
           .isDisplayed()
           .then(function(visible) {
             expect(visible).to.equal(false);
@@ -230,7 +230,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
         //click the Format facet
         it('Format Facet 2nd click', function() {
-          return browser.findElement(webdriver.By.id('Format-facet'))
+          return browser.findElement(webdriver.By.id('type-facet'))
           .click();
         });
 
