@@ -268,7 +268,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Collections Facet caret before click', function() {
+          it('Collections Accordion caret before click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
             .getAttribute('class').then(function(text) {
               expect(text).to.include('fa-caret-right');
@@ -289,21 +289,21 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Collections Facet caret after 1st click', function() {
+          it('Collections Accordion caret after 1st click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
             .getAttribute('class').then(function(text) {
               expect(text).to.include('fa-caret-down');
             });
           });
 
-          it('Collections Facet contents: Test Collection', function() {
+          it('Collections Accordion contents: Test Collection', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
             .getAttribute('title').then(function(text) {
               expect(text).to.equal('Test Collection');
             });
           });
 
-          it('Collections Facet contents: Test Collection link', function() {
+          it('Collections Accordion contents: Test Collection link', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
             .getAttribute('href').then(function(text) {
               expect(text).to.equal('http://localhost:9007/object/61ed6a68-618b-48eb-b9bd-3e7484e0590a');
@@ -323,7 +323,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Collections Facet caret after 2nd click', function() {
+          it('Collections Accordion caret after 2nd click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
             .getAttribute('class').then(function(text) {
               expect(text).to.include('fa-caret-right');
@@ -350,7 +350,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Creator Facet caret before click', function() {
+          it('Creator Accordion caret before click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
             .getAttribute('class').then(function(text) {
               expect(text).to.include('fa-caret-right');
@@ -371,7 +371,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Creator Facet caret after click', function() {
+          it('Creator Accordion caret after click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
             .getAttribute('class')
             .then(function(text) {
@@ -380,11 +380,20 @@ describe('Special Collections (Selenium) Tests', function() {
           });
 
           // author: 'Armstrong, Wayne, 1961-'
-          it('Creator Facet contents: author count', function() {
+          it('Creator Accordion contents: author count', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[3]/ul/li[1]/span[2]'))
             .getAttribute('innerHTML')
             .then(function(text) {
               expect(text).to.include(1);
+            });
+          });
+
+          // author: 'Armstrong, Wayne, 1961-'
+          it('Creator Accordion contents: author name', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[3]/ul/li[1]/span[1]/a'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include('Armstrong, Wayne, 1961-');
             });
           });
 
@@ -401,7 +410,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Creator Facet caret before click', function() {
+          it('Creator Accordion caret before click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
             .getAttribute('class')
             .then(function(text) {
@@ -429,7 +438,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Subject Facet caret before click', function() {
+          it('Subject Accordion caret before click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]/i'))
             .getAttribute('class').then(function(text) {
               expect(text).to.include('fa-caret-right');
@@ -494,7 +503,6 @@ describe('Special Collections (Selenium) Tests', function() {
               expect(text).to.include('fa-caret-right');
             });
           });
-          //TODO add tests to see if the window is populated
         });
       });
 
