@@ -250,13 +250,6 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
 
-
-
-
-
-
-
-
         describe('Collection accordion', function() {
           //check the collection facet title
           it('Collections Accordion title', function() {
@@ -339,10 +332,6 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
 
-
-
-
-
         describe('Creator Accordion', function() {
           //check the creator accordion title
           it('Creator Accordion title', function() {
@@ -421,6 +410,7 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+
         describe('Subject Accordion', function() {
           //check the Subject accordion title
           it('Subject Accordion title', function() {
@@ -460,11 +450,27 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Subject Facet caret after click', function() {
+          it('Subject Accordion caret after click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]/i'))
             .getAttribute('class')
             .then(function(text) {
               expect(text).to.include('fa-caret-down');
+            });
+          });
+
+          it('Subject Accordion contents: subject count', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[4]/ul/li[2]/span[2]'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include('(1)');
+            });
+          });
+
+          it('Subject Accordion contents: subject name', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[4]/ul/li[2]/span[1]/a'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include('Bands (Music)');
             });
           });
 
@@ -481,7 +487,7 @@ describe('Special Collections (Selenium) Tests', function() {
             });
           });
 
-          it('Subject Facet caret before click', function() {
+          it('Subject Accordion caret before click', function() {
             return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[4]/i'))
             .getAttribute('class')
             .then(function(text) {
