@@ -330,12 +330,10 @@ div.header-logo img {
 
 /* Begin search banner */
 div.banner-search {
-  position: relative;
-  top: 32px;
-}
-
-div.banner-search > form {
-  float: right;
+  /*position: relative;
+  top: 32px;*/
+  margin: 48px auto 0 auto;
+  width: 30%;
 }
 
 div.banner-search input {
@@ -796,7 +794,7 @@ button.accordion {
 /* End facet section */
 
 div.facet-breadcrumbs {
-  margin: 30px auto 0 auto;
+  margin: 45px auto 0 auto;
   width: 80%;
 }
 

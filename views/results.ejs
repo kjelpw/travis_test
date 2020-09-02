@@ -1,14 +1,23 @@
 <%- include('partials/header') -%>
 <%- include('partials/title-banner') -%>
 
-<div class="facet-breadcrumbs">
-  <a id="new-search-link" href="<%- root_url %>">Start Over</a>
+<div class="banner-search">
+    <form method="get" action="<%= root_url %>/search">
+        <input type="text" name="q[]" placeholder="Search Repository" title="Search Repository"/>
+        <input type="hidden" name="type[]" value="contains">
+        <input type="hidden" name="bool[]" value="or">
+        <input type="hidden" name="field[]" value="all">
+        <button alt="Search" title="Submit"><i class="fas fa-search"></i></button>
+    </form>
+</div>
 
+<div class="facet-breadcrumbs">
   <% if (isAdvancedSearch) { %>
     <a id="advanced-search-return-link" href="<%- root_url %>/advanced-search">Return to Advanced Search</a>
   <% } %>
 
   <% if (facet_breadcrumb_trail) { %>
+    <a id="new-search-link" href="<%- root_url %>">Start Over</a>
     <%- facet_breadcrumb_trail %>
   <% } %>
 </div>
