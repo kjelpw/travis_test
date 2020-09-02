@@ -142,11 +142,6 @@ describe('Special Collections (Selenium) Tests', function() {
       });
 
 
-
-
-
-
-
       //for the accorions/facets on the main page
       describe('Facet tests (frontpage)', function() {
         //navigate to the frontapge
@@ -154,188 +149,103 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(frontend);
         });
 
-        //check the Format facet title
-        it('Format Facet title', function() {
-          return browser.findElement(webdriver.By.xpath('//*[@id="type-facet"]'))
-          .getAttribute('innerHTML').then(function(text) {
-            expect(text).to.include('<h4>Format</h4>');
+
+        describe('Format facet', function() {
+          //check the Format facet title
+          it('Format Facet title', function() {
+            return browser.findElement(webdriver.By.xpath('//*[@id="type-facet"]'))
+            .getAttribute('innerHTML').then(function(text) {
+              expect(text).to.include('<h4>Format</h4>');
+            });
           });
-        });
 
-        it('Format Facet not hidden', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(true);
+          it('Format Facet not hidden', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(true);
+            });
           });
-        });
 
-        it('Format Facet caret before click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('fa-caret-down');
+          it('Format Facet caret before click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-down');
+            });
           });
-        });
 
-        //inserted 3 still test into elasticsearch images, should show 3 in the facet
-        it('Format Facet contents: still image count', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[1]/div/div[3]/div'))
-          .getAttribute('innerHTML').then(function(text) {
-            expect(text).to.include('3');
+          //inserted 3 still test into elasticsearch images, should show 3 in the facet
+          it('Format Facet contents: still image count', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[1]/div/div[3]/div'))
+            .getAttribute('innerHTML').then(function(text) {
+              expect(text).to.include('3');
+            });
           });
-        });
 
-        //used for counting objects of other types
+          //used for counting objects of other types
 
-        // it('Format Facet contents: text count', function() {
-        //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[2]/div/div[3]/div'))
-        //   .getAttribute('innerHTML').then(function(text) {
-        //     expect(text).to.include('0');
-        //   });
-        // });
-        //
-        // it('Format Facet contents: moving image count', function() {
-        //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[3]/div/div[3]/div'))
-        //   .getAttribute('innerHTML').then(function(text) {
-        //     expect(text).to.include('0');
-        //   });
-        // });
-        //
-        // it('Format Facet contents: sound recording count', function() {
-        //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[4]/div/div[3]/div'))
-        //   .getAttribute('innerHTML').then(function(text) {
-        //     expect(text).to.include('0');
-        //   });
-        // });
+          // it('Format Facet contents: text count', function() {
+          //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[2]/div/div[3]/div'))
+          //   .getAttribute('innerHTML').then(function(text) {
+          //     expect(text).to.include('0');
+          //   });
+          // });
+          //
+          // it('Format Facet contents: moving image count', function() {
+          //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[3]/div/div[3]/div'))
+          //   .getAttribute('innerHTML').then(function(text) {
+          //     expect(text).to.include('0');
+          //   });
+          // });
+          //
+          // it('Format Facet contents: sound recording count', function() {
+          //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[4]/div/div[3]/div'))
+          //   .getAttribute('innerHTML').then(function(text) {
+          //     expect(text).to.include('0');
+          //   });
+          // });
 
-        //click the Format facet
-        it('Format Facet 1st click', function() {
-          return browser.findElement(webdriver.By.id('type-facet'))
-          .click();
-        });
-
-        //currently (correctly )fails due to bug, different caret?
-        it('Format Facet hidden', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(false);
+          //click the Format facet
+          it('Format Facet 1st click', function() {
+            return browser.findElement(webdriver.By.id('type-facet'))
+            .click();
           });
-        });
 
-        it('Format Facet caret after click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('a-caret-right');
+          //currently (correctly )fails due to bug, different caret?
+          it('Format Facet hidden', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
           });
-        });
 
-        //click the Format facet
-        it('Format Facet 2nd click', function() {
-          return browser.findElement(webdriver.By.id('type-facet'))
-          .click();
-        });
-
-        it('Format Facet not hidden after 2nd click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(true);
+          it('Format Facet caret after click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('a-caret-right');
+            });
           });
-        });
 
-        it('Format Facet caret after 2nd click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('fa-caret-down');
+          //click the Format facet
+          it('Format Facet 2nd click', function() {
+            return browser.findElement(webdriver.By.id('type-facet'))
+            .click();
           });
-        });
 
-
-
-
-
-
-
-
-
-
-        //check the collection facet title
-        it('Collections Accordion title', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
-          .getAttribute('innerHTML')
-          .then(function(text) {
-            expect(text).to.include('<h4>Collections</h4>');
+          it('Format Facet not hidden after 2nd click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(true);
+            });
           });
-        });
 
-        it('Collections Accordion hidden', function() {
-          return browser.findElement(webdriver.By.id('collections-window'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(false);
-          });
-        });
-
-        it('Collections Facet caret before click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('fa-caret-right');
-          });
-        });
-
-        //click the collection accordion
-        it('Collections Accordion 1st click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
-          .click();
-        });
-
-        it('Collections Accordion not hidden', function() {
-          return browser.findElement(webdriver.By.id('collections-window'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(true);
-          });
-        });
-
-        it('Collections Facet caret after 1st click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('fa-caret-down');
-          });
-        });
-
-        it('Collections Facet contents: Test Collection', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
-          .getAttribute('title').then(function(text) {
-            expect(text).to.equal('Test Collection');
-          });
-        });
-
-        it('Collections Facet contents: Test Collection link', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
-          .getAttribute('href').then(function(text) {
-            expect(text).to.equal('http://localhost:9007/object/61ed6a68-618b-48eb-b9bd-3e7484e0590a');
-          });
-        });
-
-        it('Collections Accordion 2nd click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
-          .click();
-        });
-
-        it('Collections Accordion hidden', function() {
-          return browser.findElement(webdriver.By.id('collections-window'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(false);
-          });
-        });
-
-        it('Collections Facet caret after 2nd click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('fa-caret-right');
+          it('Format Facet caret after 2nd click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[1]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-down');
+            });
           });
         });
 
@@ -345,73 +255,163 @@ describe('Special Collections (Selenium) Tests', function() {
 
 
 
-        //check the creator accordion title
-        it('Creator Accordion title', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
-          .getAttribute('innerHTML')
-          .then(function(text) {
-            expect(text).to.include('Creator');
+
+
+        describe('Collection accordion', function() {
+          //check the collection facet title
+          it('Collections Accordion title', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include('<h4>Collections</h4>');
+            });
+          });
+
+          it('Collections Accordion hidden', function() {
+            return browser.findElement(webdriver.By.id('collections-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
+          });
+
+          it('Collections Facet caret before click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-right');
+            });
+          });
+
+          //click the collection accordion
+          it('Collections Accordion 1st click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
+            .click();
+          });
+
+          it('Collections Accordion not hidden', function() {
+            return browser.findElement(webdriver.By.id('collections-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(true);
+            });
+          });
+
+          it('Collections Facet caret after 1st click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-down');
+            });
+          });
+
+          it('Collections Facet contents: Test Collection', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
+            .getAttribute('title').then(function(text) {
+              expect(text).to.equal('Test Collection');
+            });
+          });
+
+          it('Collections Facet contents: Test Collection link', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
+            .getAttribute('href').then(function(text) {
+              expect(text).to.equal('http://localhost:9007/object/61ed6a68-618b-48eb-b9bd-3e7484e0590a');
+            });
+          });
+
+          it('Collections Accordion 2nd click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
+            .click();
+          });
+
+          it('Collections Accordion hidden', function() {
+            return browser.findElement(webdriver.By.id('collections-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
+          });
+
+          it('Collections Facet caret after 2nd click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-right');
+            });
           });
         });
 
-        it('Creator Accordion hidden', function() {
-          return browser.findElement(webdriver.By.id('Creator-window'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(false);
+
+
+
+
+
+        describe('Creator Accordion', function() {
+          //check the creator accordion title
+          it('Creator Accordion title', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
+            .getAttribute('innerHTML')
+            .then(function(text) {
+              expect(text).to.include('Creator');
+            });
           });
-        });
 
-        it('Creator Facet caret before click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
-          .getAttribute('class').then(function(text) {
-            expect(text).to.include('fa-caret-right');
+          it('Creator Accordion hidden', function() {
+            return browser.findElement(webdriver.By.id('Creator-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
           });
-        });
 
-        //click the creator accordion
-        it('Creator Accordion 1st click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
-          .click();
-        });
-
-        it('Creator Accordion not hidden', function() {
-          return browser.findElement(webdriver.By.id('Creator-window'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(true);
+          it('Creator Facet caret before click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
+            .getAttribute('class').then(function(text) {
+              expect(text).to.include('fa-caret-right');
+            });
           });
-        });
 
-        it('Creator Facet caret after click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
-          .getAttribute('class')
-          .then(function(text) {
-            expect(text).to.include('fa-caret-down');
+          //click the creator accordion
+          it('Creator Accordion 1st click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
+            .click();
           });
-        });
 
-        it('Creator Accordion 2nd click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
-          .click();
-        });
-
-        it('Creator Accordion hidden', function() {
-          return browser.findElement(webdriver.By.id('Creator-window'))
-          .isDisplayed()
-          .then(function(visible) {
-            expect(visible).to.equal(false);
+          it('Creator Accordion not hidden', function() {
+            return browser.findElement(webdriver.By.id('Creator-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(true);
+            });
           });
-        });
 
-        it('Creator Facet caret before click', function() {
-          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
-          .getAttribute('class')
-          .then(function(text) {
-            expect(text).to.include('fa-caret-right');
+          it('Creator Facet caret after click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
+            .getAttribute('class')
+            .then(function(text) {
+              expect(text).to.include('fa-caret-down');
+            });
           });
+
+          it('Creator Accordion 2nd click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]'))
+            .click();
+          });
+
+          it('Creator Accordion hidden', function() {
+            return browser.findElement(webdriver.By.id('Creator-window'))
+            .isDisplayed()
+            .then(function(visible) {
+              expect(visible).to.equal(false);
+            });
+          });
+
+          it('Creator Facet caret before click', function() {
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[3]/i'))
+            .getAttribute('class')
+            .then(function(text) {
+              expect(text).to.include('fa-caret-right');
+            });
+          });
+          //TODO add tests to see if the window is populated
         });
-        //TODO add tests to see if the window is populated
       });
 
 
