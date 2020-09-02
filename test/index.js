@@ -407,6 +407,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.get(test_object1);
         });
 
+        //tests if the collection linked goes to the right collection
         it('In Collections link test', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/p/a'))
           .getAttribute('href')
