@@ -392,7 +392,7 @@ describe('Special Collections (Selenium) Tests', function() {
 
           // author: 'Armstrong, Wayne, 1961-'
           it('Creator Facet contents: author count', function() {
-            return brower.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[3]/ul/li[1]/span[2]'))
+            return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[3]/ul/li[1]/span[2]'))
             .getAttribute('innerHTML')
             .then(function(text) {
               expect(text).to.include(1);
@@ -419,7 +419,6 @@ describe('Special Collections (Selenium) Tests', function() {
               expect(text).to.include('fa-caret-right');
             });
           });
-          //TODO add tests to see if the window is populated
         });
 
         describe('Subject Accordion', function() {
