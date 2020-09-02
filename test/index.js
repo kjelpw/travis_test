@@ -185,6 +185,8 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        //used for counting objects of other types
+
         // it('Format Facet contents: text count', function() {
         //   return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[1]/ul/li[2]/div/div[3]/div'))
         //   .getAttribute('innerHTML').then(function(text) {
@@ -248,7 +250,8 @@ describe('Special Collections (Selenium) Tests', function() {
             expect(text).to.include('fa-caret-down');
           });
         });
-        //TODO add tests to see if the window is populated
+
+
 
 
 
@@ -302,6 +305,20 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('Collections Facet contents: Test Collection', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
+          .getAttribute('title').then(function(text) {
+            expect(text).to.equal('Test Collection');
+          });
+        });
+
+        it('Collections Facet contents: Test Collection link', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/div[2]/ul/li/span/a'))
+          .getAttribute('href').then(function(text) {
+            expect(text).to.equal('http://localhost:9007/object/61ed6a68-618b-48eb-b9bd-3e7484e0590a');
+          });
+        });
+
         it('Collections Accordion 2nd click', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[1]/div/button[2]'))
           .click();
@@ -321,7 +338,6 @@ describe('Special Collections (Selenium) Tests', function() {
             expect(text).to.include('fa-caret-right');
           });
         });
-        //TODO add tests to see if the window is populated
 
 
 
