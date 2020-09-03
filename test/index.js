@@ -581,6 +581,18 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         //cite item and download file
+        it('cite item title test', function() {
+          return browser.findElement(webdriver.By.xpath('//*[@id="view-citations"]'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.include('Cite This Item');
+          });
+        });
+
+        it('cite item click test', function() {
+          return browser.findElement(webdriver.By.xpath('//*[@id="view-citations"]'))
+          .click();
+        });
       });
 
 
