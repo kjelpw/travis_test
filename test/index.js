@@ -564,6 +564,22 @@ describe('Special Collections (Selenium) Tests', function() {
           });
         });
 
+        it('subject title test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[9]/td[2]/p[1]/a'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.include('Universities and Colleges');
+          });
+        });
+
+        it('subject link test', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[9]/td[2]/p[1]/a'))
+          .getAttribute('href')
+          .then(function(text) {
+            expect(text).to.include('[Subject][]=Universities and Colleges');
+          });
+        });
+
         //cite item and download file
       });
 
