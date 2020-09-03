@@ -576,7 +576,7 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[3]/div/table/tbody/tr[9]/td[2]/p[1]/a'))
           .getAttribute('href')
           .then(function(text) {
-            expect(text).to.include('[Subject][]=Universities and colleges');
+            expect(text).to.include('[Subject][]=Universities%20and%20colleges');
           });
         });
 
@@ -592,6 +592,22 @@ describe('Special Collections (Selenium) Tests', function() {
         it('cite item click test', function() {
           return browser.findElement(webdriver.By.xpath('//*[@id="view-citations"]'))
           .click();
+        });
+
+        it('cite item title after click test', function() {
+          return browser.findElement(webdriver.By.xpath('//*[@id="view-citations"]'))
+          .getAttribute('innerHTML')
+          .then(function(text) {
+            expect(text).to.include('Hide Citations');
+          });
+        });
+
+        it('citation container visible test', function() {
+          return browser.findElement(webdriver.By.xpath('//*[@id="view-citations"]'))
+          .isDisplayed()
+          .then(function(visible) {
+            expect(visible).to.equal(true);
+          });
         });
       });
 
