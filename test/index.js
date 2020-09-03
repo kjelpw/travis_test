@@ -603,7 +603,7 @@ describe('Special Collections (Selenium) Tests', function() {
         });
 
         it('citation container visible test', function() {
-          return browser.findElement(webdriver.By.xpath('//*[@id="view-citations"]'))
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[3]/div[2]'))
           .isDisplayed()
           .then(function(visible) {
             expect(visible).to.equal(true);
