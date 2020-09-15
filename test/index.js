@@ -647,6 +647,14 @@ describe('Special Collections (Selenium) Tests', function() {
           return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[2]/div[2]/div/div[3]/div/dl/a'))
           .click();
         });
+
+        it('Collection contents', function() {
+          return browser.findElement(webdriver.By.xpath('/html/body/div/main/div/div[4]/div[2]/div[4]/div/div/dl/a'))
+          .getAttribute('href')
+          .then(function(text) {
+            expect(text).to.include('http://localhost:9007/datastream/7479257d-3c34-4e87-8358-05460a828ca1/tn');
+          });
+        });
       });
 
 

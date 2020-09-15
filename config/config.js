@@ -201,7 +201,7 @@ module.exports = {
         "pdf": "foaf:Document"
     },
 
-    IIIFThumbnailWidth: "67",
+    IIIFThumbnailWidth: "200",
     IIIFThumbnailHeight: "",
 
 
@@ -230,7 +230,8 @@ module.exports = {
     dateFieldMatchField: "display_record.dates.label",
     dateFieldMatchValue: "creation",
 
-    showDateRangeLimiter: true,
+    showSearchResultsDateRangeLimiter: true,
+    showCollectionViewDateRangeLimiter: true,
     defaultDaterangeFromDate: "1800",
 
     /*

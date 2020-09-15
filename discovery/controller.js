@@ -60,38 +60,37 @@ exports.renderRootCollection = function(req, res) {
 	page = req.query.page || 1,
 	path = config.rootUrl + req._parsedOriginalUrl.path;
 
-	Service.getTopLevelCollections(null, function(error, response) {
+	Service.getTopLevelCollections(page, function(error, response) {
 		if(error) {
-			console.log(error);
+			data["logMsg"] = error;
 			data.error = "Error: could not retrieve collections.";
+			res.render('collections', data);
 		}
 		else {
-			data.allCollections = response.list;
-			data.collections = Helper.getArrayPage(response.list, parseInt(page), config.defaultHomePageCollectionsCount);
+			data.collections = response.list;
 			data.searchFields = config.searchFields;
 			data.options["perPageCountOptions"] = config.defaultHomePageCollectionsCount;
-		}
 
-		Service.getFacets(null, function(error, facets) {
-			if(error) {
-				console.log(error);
-			}
-			else {
-				var facetList = Facets.getFacetList(facets, []);
-				for(var key in facetList) {
-					if(config.frontPageFacets.includes(key) === false) {
-						delete facetList[key];
-					}
+			Service.getFacets(null, function(error, facets) {
+				if(error) {
+					data["logMsg"] = error;
 				}
+				else {
+					var facetList = Facets.getFacetList(facets, []);
+					for(var key in facetList) {
+						if(config.frontPageFacets.includes(key) === false) {
+							delete facetList[key];
+						}
+					}
 
-				data.facets = Facets.create(facetList, config.rootUrl);
-				data.typeList = Helper.getTypeDisplayList(facets);
-				data.pagination = Paginator.create(data.collections, page, config.defaultHomePageCollectionsCount, response.count, path);
-				data.pagination["anchor"] = "#collections";
-			}
-			
-			res.render('collections', data);
-		});
+					data.facets = Facets.create(facetList, config.rootUrl);
+					data.typeList = Helper.getTypeDisplayList(facets);
+					data.pagination = Paginator.create(data.collections, page, config.defaultHomePageCollectionsCount, response.count, path);
+					data.pagination["anchor"] = "#collections";
+				}
+				res.render('collections', data);
+			});
+		}
 	});
 }
 
@@ -120,7 +119,9 @@ var renderCollection = function(req, res) {
 			root_url: config.rootUrl,
 			searchFields: config.searchFields,
 			options: {},
-			sortType: req.query.sort || config.defaultCollectionSortField || "Title"
+			sortType: req.query.sort || config.defaultCollectionSortField || "Title",
+			fromDate: config.defaultDaterangeFromDate,
+			toDate: new Date().getFullYear()
 		};
 			
 		var	pid = req.params.pid || "",
@@ -128,24 +129,30 @@ var renderCollection = function(req, res) {
 			pageSize = req.query.resultsPerPage || config.defaultCollectionsPerPage || 12,
 			path = config.rootUrl + req._parsedOriginalUrl.path,
 			reqFacets = req.query.f || null,
-			showAll = req.query.showAll || [];
+			showAll = req.query.showAll || [],
+			daterange = (req.query.from || req.query.to) && (parseInt(req.query.from) < parseInt(req.query.to)) ? {
+				from: req.query.from || config.defaultDaterangeFromDate,
+				to: req.query.to || new Date().getFullYear()
+			} : null;
 
 		data.collectionID = pid;
 		data.options["expandFacets"] = [];
-		data.options["perPageCountOptions"] = config.resultCountOptions;
+		data.options["perPageCountOptions"] = config.resultCountOptions || [];
 		data.options["pageSize"] = pageSize;
-		data.options["sortByOptions"] = config.collectionSortByOptions;
+		data.options["sortByOptions"] = config.collectionSortByOptions || {};
+		data.options["showDateRange"] = config.showCollectionViewDateRangeLimiter || false;
 
 		let sortBy = Helper.getSortDataArray(data.sortType);
-		Service.getObjectsInCollection(pid, page, reqFacets, sortBy, pageSize, function(error, response) {
+		Service.getObjectsInCollection(pid, page, reqFacets, sortBy, pageSize, daterange, function(error, response) {
 			if(error) {
 				console.log(error);
-				data.error = "Could not open collection.";
+				data.error = "Could not open collection";
+				data["logMsg"] = error;
 				data.current_collection_title = "Error";
 				return res.render('collection', data);
 			}
 			else {
-				data.collections = response.list;
+				data.results = response.list;
 				data.current_collection = pid;
 				data.current_collection_title = response.title || "Untitled";
 				data.current_collection_abstract = response.abstract || "";
@@ -158,6 +165,10 @@ var renderCollection = function(req, res) {
 				if(reqFacets) {
 					reqFacets = Facets.getSearchFacetObject(reqFacets);
 				}
+				if(daterange) {
+					data.fromDate = daterange.from;
+					data.toDate = daterange.to;
+				}
 
 				Format.formatFacetDisplay(facetList, function(error, facetList) {
 					data.pagination = Paginator.create(response.list, page, pageSize, response.count, path);
@@ -169,7 +180,10 @@ var renderCollection = function(req, res) {
 						data.facets = null;
 					}
 
-					return res.render('collection', data);
+					Format.formatFacetBreadcrumbs(reqFacets, function(error, facets) {
+						data.facet_breadcrumb_trail = Facets.getFacetBreadcrumbObject(reqFacets, daterange, config.rootUrl);		
+						return res.render('collection', data);
+					});
 				});
 			}
 		});
@@ -211,7 +225,6 @@ exports.renderObjectView = function(req, res) {
 		summary: null,
 		metadata: {},
 		error: null,
-		devError: null,
 		citations: null,
 		downloads: null,
 		transcript: null,
@@ -222,7 +235,7 @@ exports.renderObjectView = function(req, res) {
 	Service.fetchObjectByPid(config.elasticsearchPublicIndex, pid, function(error, response) {
 		if(error) {
 			data.error = config.viewerErrorMessage;
-			data.devError = error;
+			data["logMsg"] = error;
 			console.error(error);
 			res.status(500);
 			res.render('error', data);
@@ -230,7 +243,7 @@ exports.renderObjectView = function(req, res) {
 		else if(response == null) {
 			let msg = "Object not found";
 			data.error = msg;
-			data.devError = msg + pid;
+			data["logMsg"] = msg + pid;
 			console.log(msg + pid);
 			res.status(404);
 			res.render('page-not-found', data);
@@ -256,7 +269,7 @@ exports.renderObjectView = function(req, res) {
 
 				if(data.viewer.length <= 0) {
 					data.error = config.viewerErrorMessage;
-					data.devError = "Object viewer error";
+					data["logMsg"] = "Object viewer error, can not retrieve viewer content";
 					res.render('error', data);
 				}
 				else {
@@ -265,7 +278,6 @@ exports.renderObjectView = function(req, res) {
 					Service.getCollectionHeirarchy(object.is_member_of_collection, function(collectionTitles) {
 						data.id = pid;
 						object.type = Helper.normalizeLabel("Type", object.type || "")
-							console.log("TEST type", object.type)
 						data.summary = Metadata.createSummaryDisplayObject(object);
 						data.metadata = Object.assign(data.metadata, Metadata.createMetadataDisplayObject(object, collectionTitles));
 						data.downloads = config.enableFileDownload ? Helper.getFileDownloadLinks(object, AppHelper.getDsType(object.mime_type || "")) : null; // PROD

@@ -330,10 +330,13 @@ div.header-logo img {
 
 /* Begin search banner */
 div.banner-search {
-  /*position: relative;
-  top: 32px;*/
-  margin: 48px auto 0 auto;
-  width: 30%;
+  /*margin: 48px auto 0 auto;
+  width: 30%;*/
+}
+
+div.banner-search form {
+  width: 33%;
+  margin-left: 15px;
 }
 
 div.banner-search input {
@@ -456,8 +459,7 @@ input.search-element {
   padding: 0 7px;
 }
 
-div.searchform form,
-div.banner-search form {
+div.searchform form {
   width: 100%;
 }
 
@@ -624,7 +626,7 @@ div.paginator {
 }
 
 div.paginator a {
-  text-decoration: none;
+  text-decoration: underline;
   color: inherit;
   line-height: 30px;
 }
@@ -655,7 +657,7 @@ div#home-collections form#goto-page-form {
 }
 
 form#goto-page-form {
-  margin: 15px 0 0 30px;
+  margin: 15px 0 0 15px;
 }
 
 input#set-page-number {
@@ -794,7 +796,7 @@ button.accordion {
 /* End facet section */
 
 div.facet-breadcrumbs {
-  margin: 45px auto 0 auto;
+  margin: 40px auto 0 auto;
   width: 80%;
 }
 
@@ -954,7 +956,7 @@ div.collection-breadcrumbs {
   font-size: 13px;
   padding-left: 20px;
   margin: 20px auto 0 auto;
-  width: 80%;
+  width: 82%;
 }
 
 div.collection-breadcrumbs a {
@@ -1095,6 +1097,10 @@ div.results-display h4 {
 }
 
 div.search-results-menu > div {
+  display: inline-block;
+}
+
+span.search-results-menu-group {
   display: inline-block;
 }
 

@@ -96,7 +96,6 @@ exports.search = function(req, res) {
 	let maxPages = config.maxElasticSearchResultCount / pageSize;
 	if(page > maxPages) {
 		let msg = "Search results are limited to " + config.maxElasticSearchResultCount + ". Please select a page from 1 to " + maxPages;
-		console.log(msg);
 		data.error = msg;
 		return res.render('results', data);
 	}
@@ -106,16 +105,17 @@ exports.search = function(req, res) {
 	Service.searchIndex(queryData, facets, collection, page, pageSize, daterange, sortBy, advancedSearch, function(error, response) {
 		if(error) {
 			console.error(error);
-			data.error = error;
+			data.error = "Error: There was a problem performing your search";
+			data["logMsg"] = error;
 			return res.render('results', data);
 		}
 		else {
 			data.options["expandFacets"] = expandFacets;
-			data.options["perPageCountOptions"] = config.resultCountOptions;
-			data.options["resultsViewOptions"] = config.resultsViewOptions;
-			data.options["sortByOptions"] = config.sortByOptions;
+			data.options["perPageCountOptions"] = config.resultCountOptions || [];
+			data.options["resultsViewOptions"] = config.resultsViewOptions || [];
+			data.options["sortByOptions"] = config.sortByOptions || {};
 			data.options["pageSize"] = pageSize;
-			data.options["showDateRange"] = config.showDateRangeLimiter;
+			data.options["showDateRange"] = config.showSearchResultsDateRangeLimiter || false;
 
 			// Add the metadata display field from the configuration, then add the results list to the view data
 			Metadata.addResultMetadataDisplays(response.results);
@@ -133,6 +133,7 @@ exports.search = function(req, res) {
 				data.fromDate = daterange.from;
 				data.toDate = daterange.to;
 			}
+
 			// Get a normalized list of the facet data returned from the search.  
 			let facetList = Facets.getFacetList(response.facets, showAll);
 			Format.formatFacetDisplay(facetList, function(error, facetList) {

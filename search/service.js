@@ -1,9 +1,7 @@
-  /**
+ /**
     Copyright 2019 University of Denver
-
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
-
     You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
     
@@ -265,6 +263,15 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
       filters.push(Helper.getDateRangeQuery(fullDate));
     }
 
+    // Restrict results to members of collection
+    if(collection) {
+      booleanQuery.bool.must.push({
+        "match": {
+          "is_member_of_collection": collection
+        }
+      });
+    }
+
     // Do not show collection objects
     if(config.showCollectionObjectsInSearchResults == false) {
       restrictions.push({
@@ -294,17 +301,19 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
       }
     }
 
-    // If empty querystring, search for all items that are not collections
     else {
-      restrictions.push({
-        match: {
-          "object_type": "collection"
-        }
-      });
+      if(!collection) {
+        restrictions.push({
+          match: {
+            "object_type": "collection"
+          }
+        });
+      }
       queryObj = {
         "bool": {
           "must": booleanQuery,
-          "must_not": restrictions
+          "must_not": restrictions,
+          "filter": filter
         }
       }
     }
@@ -396,6 +405,7 @@ exports.searchIndex = function(queryData, facets=null, collection=null, pageNum=
 
           // Add the results array, send the response
           responseData['results'] = results;
+          responseData['elasticResponse'] = response;
           callback(null, responseData);
         }
         catch(error) {
